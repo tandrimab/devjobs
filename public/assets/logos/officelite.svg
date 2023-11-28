@@ -1,0 +1,17 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 3">
+<rect id="Rectangle" width="50" height="50" rx="15" fill="#2F4FC7"/>
+<g id="Group 5">
+<circle id="Oval Copy 18" cx="30" cy="25" r="10" fill="#5175FF"/>
+<g id="Oval Copy 17">
+<circle id="Mask" cx="20" cy="25" r="10" fill="#5175FF"/>
+<mask id="mask0_0_4134" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="10" y="15" width="20" height="20">
+<circle id="Mask_2" cx="20" cy="25" r="10" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_4134)">
+<circle id="Oval Copy 17_2" opacity="0.323544" cx="30" cy="25" r="10" fill="#B4C4FF"/>
+</g>
+</g>
+</g>
+</g>
+</svg>
