@@ -59,7 +59,8 @@ module.exports = withMT({
       lightBlue: '#5964E0',
       btnLight: '#C9C9C9',
       btnDarkHover: '#939BF4',
-      btnLightHover: '#5964E0',
+      btnLightHover: 'rgba(89, 100, 224, 0.1)',
+
     },
     opacity: {
       1: '0.1',
