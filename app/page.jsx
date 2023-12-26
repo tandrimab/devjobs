@@ -23,8 +23,8 @@ export default function Home() {
     <main className=" min-h-screen flex items-center justify-between flex-col max-w-[85%] p-24 mx-auto mt-[-9rem] relative">
       <FilterJobs />
       <div className="grid gap-12 grid-cols-3 place-content-center w-full mt-12">
-      {jobDetails && jobDetails.length ? jobDetails.map(item => (
-        <JobCardBase data={item} />
+      {jobDetails && jobDetails.length ? jobDetails.map((item, id) => (
+        <JobCardBase data={item} id={id} />
       )) : null}
       </div>
     </main>

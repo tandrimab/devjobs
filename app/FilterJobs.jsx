@@ -1,5 +1,4 @@
 "use client"
-import { Checkbox } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRef, useState } from "react"
 
@@ -16,7 +15,7 @@ export default function FilterJobs() {
     return (
         <div className=" grid grid-cols-3 place-content-center w-full divide-x-[1px] divide-veryLightGrey">
             <div className="flex items-center justify-start p-6 bg-white rounded-tl-[6px] rounded-bl-[6px]">
-                <Image src="/assets/desktop/icon-search.svg" width={24} height={24} className="my-2 mx-4" />
+                <Image src="/assets/desktop/icon-search.svg" width={24} height={24} className="my-2 mx-4" alt="search" />
                 <input
                     type="text"
                     placeholder="Filter by title, companies, expertise…"
@@ -26,7 +25,7 @@ export default function FilterJobs() {
                 />
             </div>
             <div className="flex items-center justify-start p-6 bg-white">
-                <Image src="/assets/desktop/icon-location.svg" width={24} height={24} className="my-2 mx-4" />
+                <Image src="/assets/desktop/icon-location.svg" width={24} height={24} className="my-2 mx-4"  alt="location" />
                 <input
                     type="text"
                     placeholder="Filter by location…"
