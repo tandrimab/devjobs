@@ -14,8 +14,8 @@ export default function JobPage({ params }) {
         <div>
             <div className="min-h-screen flex items-center justify-between flex-col max-w-[50%] p-24 mx-auto mt-[-9rem] relative">
                 <div className="flex bg-white w-full rounded-[6px]">
-                    <div className="w-[140px] h-[140px] flex items-center" style={{ backgroundColor: job.logoBackground }}>
-                        <img src={job.logo} alt="company logo" className="m-auto min-h-[20px]" />
+                    <div className="w-[140px] h-[140px] flex items-center relative" style={{ backgroundColor: job.logoBackground }}>
+                        <Image src={job.logo} alt="company logo" className="m-auto " height={50} width={50} />
                     </div>
                     <div className="flex items-center justify-between py-8 px-12 w-full">
                         <div>
