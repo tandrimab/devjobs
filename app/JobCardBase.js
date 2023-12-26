@@ -1,16 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 
 export default function JobCardBase(props){
-    const router = useRouter();
     return (
-        <div className="bg-white rounded-[6px] px-8 py-8 cursor-pointer max-w-md relative mt-8"
-            onClick={() => router.push(`/company/${encodeURIComponent(props.data.id)}`)}
-        >
-            
-            <Image className="absolute top-[-1.5rem]" src={props.data.logo} width={50} height={50}/>
+        <div className="bg-white rounded-[6px] px-8 py-8 cursor-pointer max-w-md relative mt-8">
+            <Link href={`/jobs/${encodeURIComponent(props.data.id)}`}>
+            <div className="h-[50px] w-[50px] rounded-[12px] absolute top-[-1.5rem] flex" style={{backgroundColor: props.data.logoBackground}}>
+                <Image className="items-center justify-center m-auto" src={props.data.logo} height={20} width={20}/>
+            </div>
             <div className="flex text-darkGrey font-base mt-4">
                 <p className="">{props.data.postedAt}</p>
                 <div className="rounded-full bg-darkGrey h-[4px] w-[4px] mx-4 my-auto"/>
@@ -19,6 +17,7 @@ export default function JobCardBase(props){
             <p className="text-xl hover:text-darkGrey font-bold mt-4">{props.data.position}</p>
             <p className="text-base text-darkGrey mt-4">{props.data.company}</p>
             <p className="text-sm text-lightBlue font-bold mt-6">{props.data.location}</p>
+            </Link>
         </div>
     )
 }
