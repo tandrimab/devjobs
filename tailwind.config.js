@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const withMT = require("@material-tailwind/react/utils/withMT");
  
-module.exports = withMT({
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -58,8 +57,10 @@ module.exports = withMT({
       veryLightGrey: 'rgba(110, 128, 152, 0.2)',
       lightBlue: '#5964E0',
       btnLight: '#C9C9C9',
+      btnDark: 'rgba(89, 100, 224, 1)',
       btnDarkHover: '#939BF4',
-      btnLightHover: 'rgba(89, 100, 224, 0.1)',
+      btnLightHover: 'rgba(89, 100, 224, 0.35)',
+      btnVeryLight: 'rgba(89, 100, 224, 0.1)',
 
     },
     opacity: {
@@ -71,4 +72,4 @@ module.exports = withMT({
     }
   },
   plugins: [],
-})
+}
