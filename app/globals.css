@@ -53,3 +53,56 @@
         font-size: 16px;
       }
 }
+
+@layer components {
+  .nav-bg {
+    background-image: url('/assets/logos/Triangle Copy 2.svg'), url('/assets/logos/Triangle Copy.svg'), url('/assets/logos/Triangle.svg');
+    background-position: bottom left, top center, right 10rem center;
+  }
+  .switch-main {
+    position: relative;
+    height: 24px;
+    width: 48px;
+    background-color: #FFFFFF;
+    padding: 5px;
+    border-radius: 12px;
+  }
+  
+  .mode-switch {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    z-index: 9999;
+  }
+  
+  .slider {  
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: .4s;
+    -webkit-transition: .4s;
+    cursor: pointer;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: #5964E0;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .mode-switch:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+}
+
