@@ -9,6 +9,24 @@ module.exports = {
     extend: {
       backgroundImage: {
       },
+      colors: {
+        violet: '#9e7f66',
+        white: '#FFFFFF',
+        lightViolet: '#939BF4',
+        lightGrey: '#F4F6F8',
+        veryDarkBlue: '#19202D',
+        veryLightBlue: 'rgba(25, 32, 45, 0.1035)',
+        grey: '#9DAEC2',
+        midnight: '#121721',
+        darkGrey: '#6E8098',
+        veryLightGrey: 'rgba(110, 128, 152, 0.2)',
+        lightBlue: '#5964E0',
+        btnLight: '#C9C9C9',
+        darkBlue: 'rgba(89, 100, 224, 1)',
+        btnDarkHover: '#939BF4',
+        btnLightHover: 'rgba(89, 100, 224, 0.35)',
+        btnVeryLight: 'rgba(89, 100, 224, 0.1)',  
+      },
     },
     fontFamily: {
       'bold': ['Kumbh sans_bold'],
