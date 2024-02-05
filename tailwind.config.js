@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+ 
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,7 +8,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: '400px',
+        md: '540px',
+        lg: '1290px'
+      },
+      borderRadius: {
+        100: '100px'
+      },
       backgroundImage: {
+        trianglePattern: "url('/assets/logos/Triangle.svg')"
       },
       colors: {
         violet: '#9e7f66',
@@ -25,8 +35,11 @@ module.exports = {
         darkBlue: 'rgba(89, 100, 224, 1)',
         btnDarkHover: '#939BF4',
         btnLightHover: 'rgba(89, 100, 224, 0.35)',
-        btnVeryLight: 'rgba(89, 100, 224, 0.1)',  
+        btnVeryLight: 'rgba(89, 100, 224, 0.1)',
       },
+      backgroundSize: {
+        '1/2': '50%'
+      }
     },
     fontFamily: {
       'bold': ['Kumbh sans_bold'],
