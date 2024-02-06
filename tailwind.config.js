@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        '13': '10fr 1fr 1fr'
+      },
       screens: {
         sm: '400px',
         md: '540px',
