@@ -22,7 +22,7 @@ export default function FilterJobsMob(props) {
                     className="text-darkGrey"
                 />
             </button>
-            <button className="bg-lightBlue rounded-[6px]">
+            <button className="bg-lightBlue rounded-[6px] min-w-[3rem]">
                 <Icon
                     path={mdiMagnify}
                     size="2rem"

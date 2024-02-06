@@ -2,16 +2,14 @@
 import { useEffect, useState } from "react"
 import FilterJobsWeb from "./FilterJobsWeb";
 import FilterJobsMob from "./FilterJobsMob";
+import useWindowSize from "@/utilities/hooks/useWindowSize";
 
 export default function FilterJobs() {
     const [searchTitle, setSearchTitle] = useState('');
     const [area, setArea] = useState('');
     const [isFulltime, setIsFulltime] = useState();
     const  [shrinkFilter, setShrinkFilter] = useState();
-
-    useEffect(() => {
-        setShrinkFilter(window.matchMedia("min-width(768px)").matches);
-    }, []);
+    const [windowWidth, _] = useWindowSize();
 
     const updateFullTime = (e) => {
         setIsFulltime(!isFulltime);
@@ -27,9 +25,9 @@ export default function FilterJobs() {
     }
 
     return (
-        <FilterJobsMob
+        windowWidth <= 968 ? <FilterJobsMob
             {...childProps}
-
-        />
+        /> :
+        <FilterJobsWeb {...childProps} />
     )
 }
