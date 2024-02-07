@@ -6,13 +6,14 @@ export const metadata = {
   description: 'Platform to find your best matches to the companies',
 }
 
-export default async function Layout({ children }) {
+export default async function Layout({ children, modal }) {
   return (
     <html lang="en">
       <body>
           <div className='bg-lightGrey'>
             <Navbar />
             {children}
+            {modal}
           </div>
       </body>
     </html>
