@@ -26,7 +26,7 @@ export default function Home() {
   
   return (
     
-    <main className=" min-h-screen flex items-center justify-between flex-col lg:max-w-[85%] max-w-full lg:p-24 md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-9rem] md:mt-[-3rem] sm:mt-[-2rem] relative">
+    <main className=" min-h-screen flex items-center justify-between flex-col lg:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-4rem] md:mt-[-3rem] sm:mt-[-2rem] relative">
       <FilterJobs />
       <div className="grid lg:gap-12 lg:grid-cols-3 place-content-center w-full mt-12 md:grid-cols-2 md:gap-3 gap-0 sm:grid-cols-1">
       {jobDetails && jobDetails.length ? jobDetails.map((item, id) => (
