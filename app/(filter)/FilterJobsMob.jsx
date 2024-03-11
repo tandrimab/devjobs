@@ -20,7 +20,7 @@ export default function FilterJobsMob(props) {
                     className="outline-none w-full bg-transparent"
                 />
             </div>
-            <button onClick={() => setShowHiddenFilter(true)}>
+            <button onClick={() => setShowHiddenFilter(true)} className="sm:mr-3 md:mr-0">
                 <Icon
                     path={mdiFilter}
                     size="2rem"
