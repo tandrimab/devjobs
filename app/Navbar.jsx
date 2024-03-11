@@ -1,20 +1,38 @@
 "use client"
-import Switch from "@/components/Switch";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import useWindowSize from "@/utilities/hooks/useWindowSize";
+import ProfileMob from "./(navProfile)/ProfileMob";
+import ProfileWeb from "./(navProfile)/ProfileWeb";
 
 
 export default function Navbar() {
+    const { data: session } = useSession();
+    const router = useRouter();
+    const [windowWidth, _] = useWindowSize();
+
+    const login = () => {
+        router.push('/login');
+    }
+
+    const signout = () => {
+        signOut({ callbackUrl: '/' });
+    }
+
+    const profileProps = {
+        login,
+        signout,
+        session,
+    }
+
     return (<nav className="bg-lightBlue lg:rounded-bl-100 md:rounded-bl-100 sm:rounded-none bg-no-repeat nav-bg md:pt-3 md:pb-4 lg:pt-4 lg:pb-8">
         <div className='flex item-center justify-between lg:max-w-[85%] max-w-full mx-auto lg:px-24 md:px-8 sm:px-8 sm:py-6 '>
             <Link href="/" className="sm:max-w-[8rem]">
                 <Image src="/assets/logos/devjobs.svg" width={200} height={200} className='py-4' alt="logo" />
             </Link>
-            <div className="flex item-center h-max ml-auto my-auto z-[999]">
-                <Image src="/assets/desktop/icon-sun.svg" height={24} width={24} className="mr-10" alt="icon" />
-                <Switch />
-                <Image src="/assets/desktop/icon-moon.svg" height={24} width={24} className="ml-10" alt="icon" />
-            </div>
+            {windowWidth > 645 ? <ProfileWeb {...profileProps} /> : <ProfileMob {...profileProps} />}
         </div>
     </nav>)
 }
