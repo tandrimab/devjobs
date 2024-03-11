@@ -42,7 +42,20 @@ module.exports = {
       },
       backgroundSize: {
         '1/2': '50%'
-      }
+      },
+      keyframes: {
+        rotate: {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(180deg)'
+          }
+        }
+      },
+      animation: {
+        btnAnimated: 'rotate 1s linear'
+      },
     },
     fontFamily: {
       'bold': ['Kumbh sans_bold'],
