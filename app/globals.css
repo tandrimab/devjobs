@@ -106,3 +106,9 @@
   }
 }
 
+@layer utilities {
+  .modal-nav-bg {
+    background-position: bottom left, top center, top right;
+  }
+}
+
