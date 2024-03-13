@@ -1,14 +1,18 @@
-import { promises as fs } from 'fs';
+import connectDB from '@/libs/mongodb';
+import Jobs from '@/models/jobs';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        const file = await fs.readFile(process.cwd() + '/public/constants/data.json', 'utf8');
-        const data = JSON.parse(file);
-        return NextResponse.json(data, {
+        await connectDB();
+        const jobs = await Jobs.find();
+        return NextResponse.json(jobs, {
             status: 200
+        });
+    } catch(error) {
+        NextResponse.json(error, {
+            status: 500
         })
-    } catch({ name, message }) {
-        return NextResponse.json({error: `${error}: ${message}`}, {status: 500})
     }
+    
 }

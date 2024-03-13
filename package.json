@@ -11,6 +11,8 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.2.1",
     "next": "13.5.6",
     "next-auth": "^4.24.5",
     "react": "^18",
