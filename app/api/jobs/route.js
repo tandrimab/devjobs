@@ -1,18 +1,44 @@
-import connectDB from '@/libs/mongodb';
-import Jobs from '@/models/jobs';
 import { NextResponse } from 'next/server';
+import clientPromise from "@/libs/mongodb";
 
 export async function GET() {
     try {
-        await connectDB();
-        const jobs = await Jobs.find();
-        return NextResponse.json(jobs, {
+        const client = await clientPromise;
+        const db = client.db("devjobs");
+        const jobs = await db.collection("jobs").aggregate([
+            {
+                $lookup:
+                {
+                    from: "company",
+                    localField: "companyDetails",
+                    foreignField: "_id",
+                    as: "companyDetails",
+                },
+            },
+            {
+                $addFields:
+                {
+                    companyDetails: {
+                        $arrayElemAt: ["$companyDetails", 0],
+                    },
+                },
+            },
+            {
+                $project: {
+                    companyDetails: {
+                        _id: 0
+                    }
+                }
+            }
+        ]).toArray();
+        return NextResponse.json(
+            jobs, {
             status: 200
-        });
-    } catch(error) {
-        NextResponse.json(error, {
+        }
+        )
+    } catch (err) {
+        return NextResponse.json(err, {
             status: 500
         })
     }
-    
 }
