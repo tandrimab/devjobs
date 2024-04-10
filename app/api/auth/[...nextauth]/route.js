@@ -18,7 +18,23 @@ export const authOptions = {
             clientSecret: process.env.AZURE_AD_CLIENT_SECRET,
             tenantId: process.env.AZURE_AD_TENANT_ID,
         }),
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, account, profile }) {
+            console.log('jwt', token, account, profile);
+            if (account && profile) {
+                token.id = profile.id;
+                token.accessToken = account.access_token;
+            }
+            return token;
+        },
+        async session({ session, token, user}) {
+            console.log('id', token.id)
+            session.user.accessToken = token.accessToken;
+            session.user.id = token.id;
+            return session;
+        }
+    }
 }
 
 export const handler = NextAuth(authOptions);
