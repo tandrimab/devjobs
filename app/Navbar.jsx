@@ -30,7 +30,7 @@ export default function Navbar() {
     return (<nav className="bg-lightBlue lg:rounded-bl-100 md:rounded-bl-100 sm:rounded-none bg-no-repeat nav-bg md:pt-3 md:pb-4 lg:pt-4 lg:pb-8">
         <div className='flex item-center justify-between lg:max-w-[85%] max-w-full mx-auto lg:px-24 md:px-8 sm:px-8 sm:py-6 '>
             <Link href="/" className="sm:max-w-[8rem]">
-                <Image src="/assets/logos/devjobs.svg" width={200} height={200} className='py-4' alt="logo" />
+                <Image src="https://devjobs-fs.s3.ap-south-1.amazonaws.com/assets/logos/devjobs.svg" width={200} height={200} className='py-4' alt="logo" />
             </Link>
             {windowWidth > 645 ? <ProfileWeb {...profileProps} /> : <ProfileMob {...profileProps} />}
         </div>
