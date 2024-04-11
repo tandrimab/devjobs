@@ -14,15 +14,15 @@ export default function JobPage({ params }) {
         <div>
             <div className="min-h-screen flex items-center justify-between flex-col lg:max-w-[50%] md:max-w-[90%] sm:max-w-[90%] mx-auto lg:mt-[-4rem] md:mt-[-2rem] sm:mt-[-1rem] sm:mb-[1rem] shrink-0relative">
                 <div className="flex md:flex-row sm:flex-col bg-white w-full rounded-[6px] sm:flex-col sm:items-center">
-                    <div className="md:w-[140px] md:h-[140px] sm:w-[3rem] sm:h-[3rem] sm:p-4 flex items-center relative sm:mt-[-1rem] md:mt-0" style={{ backgroundColor: job.logoBackground }}>
-                        <Image src={job.logo} alt="company logo" className="m-auto " height={50} width={50} />
+                    <div className="md:w-[140px] md:h-[140px] sm:w-[3rem] sm:h-[3rem] sm:p-4 flex items-center relative sm:mt-[-1rem] md:mt-0" style={{ backgroundColor: job.companyDetails.logoBackground }}>
+                        <Image src={job.companyDetails.logo} alt="company logo" className="m-auto " height={50} width={50} />
                     </div>
                     <div className="flex items-center justify-between py-8 px-12 w-full md:flex-row sm:flex-col">
                         <div className="sm:text-center md:text-left">
-                            <p className="font-bold text-2xl mb-2">{job.company}</p>
-                            <p className="text-darkGrey shrink-0">{job.website}</p>
+                            <p className="font-bold text-2xl mb-2">{job.companyDetails.name}</p>
+                            <p className="text-darkGrey shrink-0">{job.companyDetails.website}</p>
                         </div>
-                        <Link href={job.website} className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] hover:bg-btnLightHover sm:mt-8 md:mt-0 shrink-0">Company Site</Link>
+                        <Link href={job.companyDetails.website} className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] hover:bg-btnLightHover sm:mt-8 md:mt-0 shrink-0">Company Site</Link>
                     </div>
                 </div>
                 <div className="flex bg-white w-full rounded-[6px] md:px-12 md:py-10 sm:px-8 sm:py-8 flex-col mt-8">
