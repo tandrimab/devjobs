@@ -39,6 +39,7 @@ module.exports = {
         btnDarkHover: '#939BF4',
         btnLightHover: 'rgba(89, 100, 224, 0.35)',
         btnVeryLight: 'rgba(89, 100, 224, 0.1)',
+        warning: 'rgba(255, 0, 0, 1)'
       },
       backgroundSize: {
         '1/2': '50%'
