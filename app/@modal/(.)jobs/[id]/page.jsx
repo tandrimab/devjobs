@@ -1,5 +1,5 @@
 'use client'
-import useStore from "../../../store/store"
+import {useStore} from "../../../store/store"
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
