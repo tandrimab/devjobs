@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function Error({}) {
     const router = useRouter();
     return(
-        <div className="min-h-[calc(100vh-10rem)] flex items-center justify-center flex-col max-w-[50%] mx-auto relative overflow-auto">
+        <div className="min-h-[calc(100vh-10rem)] flex items-center justify-center flex-col lg:max-w-[50%] sm:max-w-auto md:px-8 mx-auto relative overflow-auto">
             <div>
                 <span className="text-[15rem] font-bold text-darkGrey">4</span>
                 <span className="text-[15rem] text-veryLightGrey font-bold">0</span>
