@@ -4,14 +4,20 @@ import Icon from '@mdi/react';
 import { mdiGithub, mdiGoogle, mdiMicrosoftOutlook } from '@mdi/js';
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { usePathStore } from "../store/store";
 
 export default function LoginPage({ }) {
     const { data: session } = useSession();
-    if (session) {
-        redirect('/')
-    }
+    const router  = useRouter();
+    const { prevPath } = usePathStore()    
+
+    useEffect(() => {
+        if (session?.user?.access_token) {
+            router.push(prevPath);
+        }
+    }, [session, router])
 
     return (
         <Modal modalClassName='backdrop-blur-xl backdrop-contrast-50 bg-black/60' bodyClassName="sm:w-9/12 md:w-8/12 lg:w-4/12 rounded-[6px]">
@@ -29,9 +35,7 @@ export default function LoginPage({ }) {
                     <div className="rounded-[6px] md:px-4 flex flex-row max-w-8/12 mx-auto border-[2px] border-[#9e7f66] justify-center items-center cursor-pointer my-5 shadow hover:shadow-xl">
                         <Icon path={mdiGoogle} size='2.5rem' />
                         <button onClick={() => 
-                            signIn(
-                                'google',
-                                { callbackUrl: '/' })} className="text-xl font-medium p-4 shrink-0">
+                            signIn('google')} className="text-xl font-medium p-4 shrink-0">
                             Signin with Google
                         </button>
                     </div>
