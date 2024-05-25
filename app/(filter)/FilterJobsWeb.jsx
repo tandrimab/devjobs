@@ -1,18 +1,10 @@
+import SearchBoxAnimated from "@/components/SearchBoxAnimated";
 import Image from "next/image";
 
 export default function FilterJobsWeb(props) {
     return (
         <div className=" grid grid-cols-3 place-content-center w-full divide-x-[1px] divide-veryLightGrey bg-white max-w-full rounded-[6px]">
-            <div className="flex items-center justify-start p-4 rounded-tl-[6px] rounded-bl-[6px]">
-                <Image src="/assets/desktop/icon-search.svg" width={24} height={24} className="my-2 mx-4" alt="search" />
-                <input
-                    type="text"
-                    placeholder="Filter by title, companies, expertise…"
-                    value={props.searchTitle}
-                    onChange={(e) => props.setSearchTitle(e.target.value)}
-                    className="outline-none w-full bg-transparent"
-                />
-            </div>
+           <SearchBoxAnimated  {...props}/>
             <div className="flex items-center justify-start p-4">
                 <Image src="/assets/desktop/icon-location.svg" width={24} height={24} className="my-2 mx-4"  alt="location" />
                 <input
