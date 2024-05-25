@@ -52,10 +52,25 @@ module.exports = {
           '100%': {
             transform: 'rotate(180deg)'
           }
+        },
+        slide: {
+          "0%": {
+            top: '2px',
+            opacity: '1',
+          },
+          "50%": {
+            top: '-4px',
+            opacity: '0.5'
+          },
+          "100%": {
+            top: '-10px',
+            opacity: '0'
+          }
         }
       },
       animation: {
-        btnAnimated: 'rotate 1s linear'
+        btnAnimated: 'rotate 1s linear',
+        sliderUp: 'slide 1.8s linear',
       },
     },
     fontFamily: {
