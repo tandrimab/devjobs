@@ -19,7 +19,7 @@ export default function Error({ error }) {
       </p>
       <p className="text-darkGrey text-xl">...maybe you could try logging in again or go back to the home page</p>
       <button
-        className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-xl mx-auto mt-6 hover:bg-btnDarkHover"
+        className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-xl mx-auto mt-6 hover:bg-btnDarkHover hover-transition"
         onClick={() => router.push("/")}
       >
         <div className="flex gap-3">

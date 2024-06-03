@@ -24,7 +24,7 @@ export default function JobModal({ params }) {
                             <p className="font-bold text-2xl mb-2">{job.companyDetails.name}</p>
                             <p className="text-darkGrey">{job.companyDetails.website}</p>
                         </div>
-                        <button className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] text-sm cursor-pointer hover:bg-btnDarkHover"
+                        <button className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] text-sm cursor-pointer hover:bg-btnDarkHover hover:text-white hover-transition"
                         onClick={() => window.location.reload()}>Show More</button>
                     </div>
                 </div>

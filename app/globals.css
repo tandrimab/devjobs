@@ -110,5 +110,10 @@
   .modal-nav-bg {
     background-position: bottom left, top center, top right;
   }
+  .hover-transition {
+    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-delay: .2s;
+    transition-duration: .7s;
+  }
 }
 

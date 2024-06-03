@@ -24,7 +24,7 @@ export default function FilterJobsWeb(props) {
                 />
                 <label className="font-bold">Full Time</label>
                 <Image src="/assets/desktop/icon-check.svg" className="absolute peer-checked:block ml-[1.2rem] hidden" height={20} width={20} alt="checked" />
-                <button className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-base ml-auto hover:bg-btnDarkHover">Search</button>
+                <button className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-base ml-auto hover:bg-btnDarkHover hover-transition">Search</button>
             </label>
         </div>
     )

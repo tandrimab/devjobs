@@ -22,7 +22,7 @@ export default function JobPage({ params }) {
                             <p className="font-bold text-2xl mb-2">{job.companyDetails.name}</p>
                             <p className="text-darkGrey shrink-0">{job.companyDetails.website}</p>
                         </div>
-                        <Link href={job.companyDetails.website} className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] hover:bg-btnLightHover sm:mt-8 md:mt-0 shrink-0">Company Site</Link>
+                        <Link href={job.companyDetails.website} className="bg-btnVeryLight text-lightBlue p-4 font-bold rounded-[5px] hover:bg-btnLightHover sm:mt-8 md:mt-0 shrink-0 hover-transition">Company Site</Link>
                     </div>
                 </div>
                 <div className="flex bg-white w-full rounded-[6px] md:px-12 md:py-10 sm:px-8 sm:py-8 flex-col mt-8">

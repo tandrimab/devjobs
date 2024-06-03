@@ -62,7 +62,7 @@ export default function FilterJobsMob(props) {
             />
           </label>
           <div className="px-8 mb-4 w-full border-none">
-            <button className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-base hover:bg-btnDarkHover w-full">
+            <button className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-base hover:bg-btnDarkHover w-full hover-transition">
               Search
             </button>
           </div>
