@@ -6,9 +6,22 @@ import { signOut, useSession } from "next-auth/react";
 import useWindowSize from "@/utilities/hooks/useWindowSize";
 import ProfileMob from "./(navProfile)/ProfileMob";
 import ProfileWeb from "./(navProfile)/ProfileWeb";
+import { useEffect, useState } from "react";
+import { decode } from "@/utilities/backend/jwt";
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    if (session?.user) {
+      (async () => {
+        let decoded = await decode({ token: session.user });
+        setUserData(decoded);
+      })();
+    }
+  }, [session]);
+
   const router = useRouter();
   const [windowWidth, _] = useWindowSize();
 
@@ -23,7 +36,7 @@ export default function Navbar() {
   const profileProps = {
     login,
     signout,
-    session,
+    session: userData?.payload,
   };
 
   return (
