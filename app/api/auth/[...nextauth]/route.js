@@ -2,6 +2,20 @@ import NextAuth from "next-auth";
 import GithubProviders from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import AzureProvider from "next-auth/providers/azure-ad";
+import { encode } from "@/utilities/backend/jwt";
+
+const oauthEndpoint = {
+  github: {
+    url: 'https://github.com/login/oauth/access_token',
+    id: process.env.GITHUB_ID,
+    secret: process.env.GITHUB_SECRET,
+  },
+  google: {
+    url: 'https://oauth2.googleapis.com/token',
+    id: process.env.GOOGLE_ID,
+    secret: process.env.GOOGLE_SECRET,
+  }
+}
 
 export const authOptions = {
   session: {
@@ -36,23 +50,25 @@ export const authOptions = {
         token.access_token = account.access_token;
         token.expires_at = account.expires_at;
         token.refresh_token = account.refresh_token;
+        token.provider = account.provider;
       } else if (Date.now() < token.expires_at * 1000) {
         return token;
       } else {
         if (!token.refresh_token) throw new Error("Missing refresh token");
 
         try {
-          const response = await fetch("https://oauth2.googleapis.com/token", {
-            
+
+          const url = oauthEndpoint[token?.provider?.url]
+          const response = await fetch(url, {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            
+
             body: new URLSearchParams({
-              client_id: process.env.GOOGLE_ID,
-              client_secret: process.env.GOOGLE_SECRET,
+              client_id: token?.provider?.id,
+              client_secret: token?.provider?.secret,
               grant_type: "refresh_token",
               refresh_token: token.refresh_token,
             }),
-            
+
             method: "POST",
           });
 
@@ -76,16 +92,21 @@ export const authOptions = {
     async session({ session, token }) {
       let responseJson;
       try {
+        let signedData = await encode({
+          token: {
+            access_token: token?.access_token,
+            email: token?.email,
+            refresh_token: token?.refresh_token,
+            name: token?.name,
+            image: token?.picture
+          },
+        });
         const response = await fetch(process.env.NEXTAUTH_URL + "/api/user", {
           method: "POST",
           headers: {
             Cookie: `next-auth.session-token=${token?.access_token}`,
           },
-          body: JSON.stringify({
-            access_token: token?.access_token,
-            email: token?.email,
-            refresh_token: token?.refresh_token,
-          }),
+          body: JSON.stringify({ token: signedData }),
         });
 
         responseJson = await response.json();
@@ -97,7 +118,16 @@ export const authOptions = {
         console.log("error in session", e);
         return { ...responseJson };
       }
-      session.user = responseJson?.user;
+
+      const sessionDataSigned = await encode({
+        token: {
+          name: token?.name,
+          email: token?.email,
+          image: token?.picture,
+        },
+      });
+
+      session.user = sessionDataSigned;
       return session;
     },
   },
