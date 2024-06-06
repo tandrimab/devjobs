@@ -8,26 +8,12 @@ export async function GET() {
   const cookieStore = cookies();
 
   const sessionCookie = cookieStore.get("next-auth.session-token");
-
+  
   try {
-    if (!sessionCookie || !sessionCookie.value) {
-      throw new ApiError(401, "Authentication required");
-    }
-
     const token = await decode({
       token: sessionCookie.value,
       secret: process.env.NEXTAUTH_SECRET,
     });
-
-    if (!token || !token.access_token) {
-      if (!token) {
-        throw new ApiError(400, "Missing request body");
-      }
-
-      if (!token.access_token) {
-        throw new ApiError(401, "Authentication required");
-      }
-    }
 
     const client = await clientPromise;
 

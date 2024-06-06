@@ -1,35 +1,18 @@
 import clientPromise from "@/libs/mongodb";
 import { NextResponse } from "next/server";
-import { decode } from "next-auth/jwt";
 import { cookies } from "next/headers";
 import ApiError from "@/utilities/backend/ApiError";
 import { ObjectId } from "mongodb";
+import { decode } from "@/utilities/backend/jwt";
 
 export async function POST(request) {
-  const cookieStore = cookies();
-
-  const sessionCookie = cookieStore.get("next-auth.session-token");
   
   try {
-    if (!sessionCookie || !sessionCookie.value) {
-      throw new ApiError(401, "Authentication required");
-    }
+    const { token } = await request.json();
 
-    const token = await request.json();
+    const decoded = await decode({token});
 
-    if (!token || !token.email || !token.access_token || !token.refresh_token) {
-      if (!token) {
-        throw new ApiError(400, "Missing request body");
-      }
-
-      if (!token.email) {
-        throw new ApiError(400, "Missing email in the request body");
-      }
-
-      if (!token.access_token || !token.refresh_token) {
-        throw new ApiError(401, token.error || "Authentication required.");
-      }
-    }
+    const decodedToken = decoded.payload;
 
     const client = await clientPromise;
 
@@ -40,7 +23,7 @@ export async function POST(request) {
     const userProfileDb = db.collection("userProfile");
 
     let existingUser = await userProfileDb.findOne({
-      "profile.personalDetails.email": token.email, 
+      "profile.personalDetails.email": decodedToken.email, 
     });
 
     const id = new ObjectId().toString();
@@ -51,8 +34,9 @@ export async function POST(request) {
         userId: id,
         profile: {
           personalDetails: {
-            email: token?.email,
-            name: token?.name,
+            email: decodedToken?.email,
+            name: decodedToken?.name,
+            image: decodedToken?.image
           },
         },
       };
@@ -60,12 +44,12 @@ export async function POST(request) {
     }
 
     const user = await usersDb.findOneAndUpdate(
-      { refresh_token: token?.refresh_token },
+      { refresh_token: decodedToken?.refresh_token },
       {
         $set: {
           userId: existingUser?.userId,
-          refresh_token: token?.refresh_token,
-          access_token: token?.access_token,
+          refresh_token: decodedToken?.refresh_token,
+          access_token: decodedToken?.access_token,
           modifiedAt: Date.now(),
         },
       },

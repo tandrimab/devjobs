@@ -9,24 +9,10 @@ export async function POST(request) {
   const sessionCookie = cookieStore.get("next-auth.session-token");
 
   try {
-    if (!sessionCookie || !sessionCookie.value) {
-      throw new ApiError(401, "Authentication required");
-    }
-
     const token = await decode({
       token: sessionCookie.value,
       secret: process.env.NEXTAUTH_SECRET,
     });
-
-    if (!token || !token.access_token) {
-      if (!token) {
-        throw new ApiError(400, "Missing request body");
-      }
-
-      if (!token.access_token) {
-        throw new ApiError(401, "Authentication required");
-      }
-    }
 
     const client = await clientPromise;
 
@@ -37,13 +23,13 @@ export async function POST(request) {
     const userProfileDb = db.collection("userProfile");
 
     const currentUser = await userDb.findOne({ access_Token: token.access_Token });
-    console.log("userId", currentUser.userId);
+    
     const filter = {
       userId: currentUser.userId,
     };
 
     const data = await request.json();
-console.log("data", data);
+
     const update = {
       $set: {
         profile: data.profile,
@@ -90,14 +76,13 @@ export async function GET() {
   const sessionCookie = cookieStore.get("next-auth.session-token");
 
   try {
-    if (!sessionCookie || !sessionCookie.value) {
-      throw new ApiError(401, "Authentication required");
-    }
 
     const token = await decode({
       token: sessionCookie.value,
       secret: process.env.NEXTAUTH_SECRET,
     });
+
+    console.log("data", token);
 
     if (!token || !token.access_token) {
       if (!token) {
