@@ -12,6 +12,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "i": "^0.3.7",
+    "jose": "^5.4.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mongodb": "^6.5.0",
