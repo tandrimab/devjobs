@@ -38,7 +38,7 @@ export default function ProfileForm({ defaultValues }) {
       application: {
         ...defaultValues.application,
         skills: [
-          ...defaultValues.application.skills,
+          ...defaultValues?.application?.skills || [],
           { skill: "" }],
       },
     },
