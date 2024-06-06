@@ -14,7 +14,7 @@ export default function LoginPage({ }) {
     const { prevPath } = usePathStore()    
 
     useEffect(() => {
-        if (session?.user?.access_token) {
+        if (session?.user) {
             router.push(prevPath);
         }
     }, [session, router])
