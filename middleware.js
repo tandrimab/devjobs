@@ -5,6 +5,17 @@ import { decode } from "./utilities/backend/jwt";
 export async function middleware(request) {
   const cookie = request.cookies.get("next-auth.session-token");
 
+  if (request.nextUrl.pathname === '/login') {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set('pathname', request.nextUrl.pathname);
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders
+      } 
+    })
+  }
+  
   try {
     if (!cookie || !cookie.value) {
       throw new ApiError(401, "Authentication required");
@@ -53,5 +64,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: '/api/user',
+  matcher: ['/api/user', '/login']
 }
