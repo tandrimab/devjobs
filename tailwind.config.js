@@ -66,11 +66,90 @@ module.exports = {
             top: '-10px',
             opacity: '0'
           }
+        },
+        slideLeft: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(0%, 0%)",
+          },
+          "50%": {
+            opacity: "1"
+          },
+          "100%": {
+            opacity: '1',       
+            transform: "translate(-100%, 0%) "
+          }
+        },
+        zoom: {
+          "0%": {
+            color: "transparent",
+            transform: "scale(0,0)"
+          },
+          "100%": {
+            color: "white",
+            transform: "scale(1,1)"
+          },          
+        },
+        underline: {
+          "0%": {
+            width: "0"
+          },
+          "100%": {
+            width: "100%",
+          }
+        },
+        focus: {
+          "0%": {
+            opacity: "0",
+            color: "transparent"
+          },
+          "100%": {
+            opacity: "1",
+            display: "block",
+            color: "rgba(89, 100, 224, 1)"
+          }
+        },
+        scaleOut: {
+          "0%": {
+            transform: "scale(1,1)",
+          },
+          "100%": {
+            transform: "scale(0,0)",
+            position:'absolute',
+            visibility: 'hidden',
+            zIndex: '-1'
+          }
+        },
+        hide: {
+          "0%": {
+            display: "block",
+            visibility: "visible"
+          },
+          "100%": {
+            display: "none",
+             visibility: "hidden"
+          }
+        },
+        scaleImage: {
+          "0%": {
+            transform: "translate(200%,100%) scale(0,0)",
+          },
+          "100%": {
+            transform: "translate(0%,0%) scale(1,1)",
+          }
         }
       },
       animation: {
         btnAnimated: 'rotate 1s linear',
         sliderUp: 'slide 1.8s linear',
+        zoomText: 'zoom .75s linear forwards',
+        underlineText: 'underline .75s 2.5s linear forwards',
+        showText: 'focus .75s 1s linear forwards',
+        scaleOutBox: 'scaleOut 1.5s 4s linear forwards',
+        hideOut: 'hide 1s 3s linear forwards',
+        sliderLeft: 'slideLeft 8s ease-in-out infinite',
+        zoomInOutText: 'zoom 8s 1s ease-in-out',
+        scaleImage: 'scaleImage 2s ease-in-out 1 forwards'
       },
     },
     fontFamily: {
