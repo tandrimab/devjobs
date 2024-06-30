@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import {useStore} from "../../store/store";
+import {useStore} from "../../../store/store";
 import { useState } from "react";
 import Link from "next/link";
 

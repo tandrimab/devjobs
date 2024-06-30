@@ -1,13 +1,24 @@
 "use client";
 import profileSchema from "@/validationSchema/profileSchema";
 import { useState, useRef, useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import {
+  useForm,
+  useFieldArray,
+  FormProvider,
+  useFormContext,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
-// import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import usePlacesAutocomplete from "use-places-autocomplete";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
 
 export default function ProfileForm({ defaultValues }) {
   const router = useRouter();
@@ -30,16 +41,13 @@ export default function ProfileForm({ defaultValues }) {
     mode: "onSubmit",
 
     defaultValues: {
-      
       selectedTab: "1",
-      
+
       ...defaultValues,
-      
+
       application: {
         ...defaultValues.application,
-        skills: [
-          ...defaultValues?.application?.skills || [],
-          { skill: "" }],
+        skills: [...(defaultValues?.application?.skills || []), { skill: "" }],
       },
     },
   });
@@ -56,31 +64,33 @@ export default function ProfileForm({ defaultValues }) {
     "Content-Type": "application/json",
   };
 
-  // const {
-  //     placesService,
-  //     placePredictions,
-  //     getPlacePredictions,
-  //     isPlacePredictionsLoading,
-  // } = usePlacesService({
-  //     apiKey: process.env.GOOGLE_MAP_API_KEY,
-  // });
+  const {
+    ready,
+    value,
+    setValue: setPlacesValue,
+    suggestions: { status, data },
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    debounce: 500,
+    defaultValue: defaultValues?.personalDetails?.location,
+  });
 
   const submitProfile = async () => {
     if (!Object.keys(errors).length) {
       if (tabValue === "4") {
         const profileDetails = getValues();
-        
+
         delete profileDetails.selectedTab;
 
         // let skills = profileDetails?.application?.skills;
-        
+
         // if (skills.length) {
         //   let skillsArr = [];
-          
+
         //   for (let val of skills) {
-            
+
         //     skillsArr.push(Object.values(val));
-          
+
         //   }
         //   profileDetails.application = {
         //     ...profileDetails.application,
@@ -119,7 +129,7 @@ export default function ProfileForm({ defaultValues }) {
             isLoading: false,
             className: "rotateY animated",
             autoClose: 5000,
-            onClose: () => router.push("/profile/view")
+            onClose: () => router.push("/profile/view"),
           });
         }
       } else {
@@ -153,15 +163,9 @@ export default function ProfileForm({ defaultValues }) {
 
   useEffect(() => {
     if (getValues()?.application?.skills?.length) {
-      setCurrentIdx(getValues()?.application?.skills?.length)
+      setCurrentIdx(getValues()?.application?.skills?.length);
     }
   }, []);
-
-  // const options = {
-  //   componentRestrictions: { country: "in" },
-  //   fields: ["address_components", "geometry", "icon", "name"],
-  //   types: ["establishment"],
-  // };
 
   const roles = [
     "Software Engineer",
@@ -221,6 +225,17 @@ export default function ProfileForm({ defaultValues }) {
         gpaRef.current.focus();
       }
     }
+  };
+
+  const handleLocationInput = (e) => {
+    setPlacesValue(e.target.value);
+  };
+
+  const handleLocationSelect = (description) => {
+    // e.preventDefault();
+    setPlacesValue(description, false);
+    setValue("personalDetails.location", description);
+    clearSuggestions();
   };
 
   return (
@@ -316,25 +331,33 @@ export default function ProfileForm({ defaultValues }) {
                 <p className="text-warning mt-2">
                   {errors.personalDetails?.email?.message}
                 </p>
-                {/*add default value*/}
                 <label className="block text-lightBlue mb-2 mt-8">
                   Location
                 </label>
-                {/* <input
-                                value={location}
-                                placeholder="Debounce 500 ms"
-                                onChange={(evt) => {
-                                    getPlacePredictions({ input: evt.target.value });
-                                    register("personalDetails.location", {
-                                      required: true,
-                                    })
-                                }}
-                                loading={isPlacePredictionsLoading}
-                            /> */}
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("personalDetails.location")}
-                />
+                <Combobox
+                  onSelect={handleLocationSelect}
+                  aria-labelledby="demo"
+                  className="w-full"
+                >
+                  <ComboboxInput
+                    className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
+                    value={value}
+                    onChange={handleLocationInput}
+                    disabled={!ready}
+                  />
+                  <ComboboxPopover className="bg-lightGrey px-4 shadow-xl">
+                    <ComboboxList>
+                      {status === "OK" &&
+                        data.map(({ place_id, description }) => (
+                          <ComboboxOption
+                            key={place_id}
+                            value={description}
+                            className="mt-3"
+                          />
+                        ))}
+                    </ComboboxList>
+                  </ComboboxPopover>
+                </Combobox>
                 <p className="text-warning mt-2">
                   {errors.personalDetails?.location?.message}
                 </p>
@@ -428,7 +451,9 @@ export default function ProfileForm({ defaultValues }) {
                 <input
                   type="date"
                   className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.graduationDate")}
+                  {...register("education.graduationDate", {
+                    valueAsDate: true,
+                  })}
                 />
                 <p className="text-warning mt-2">
                   {errors.education?.graduationDate?.message}
@@ -464,7 +489,9 @@ export default function ProfileForm({ defaultValues }) {
                 <input
                   type="number"
                   className="p-2 appearance-none w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.gpa")}
+                  {...register("education.gpa", {
+                    valueAsNumber: true,
+                  })}
                 />
                 <p className="text-warning mt-2">
                   {errors.education?.gpa?.message}
@@ -512,7 +539,9 @@ export default function ProfileForm({ defaultValues }) {
                       type="date"
                       id="startDate"
                       className="bg-transparent p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1"
-                      {...register("experience.startDate")}
+                      {...register("experience.startDate", {
+                        valueAsDate: true,
+                      })}
                     />
                     <p className="text-warning mt-2">
                       {errors.experience?.startDate?.message}
@@ -526,7 +555,9 @@ export default function ProfileForm({ defaultValues }) {
                       <input
                         type="date"
                         className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                        {...register("experience.endDate")}
+                        {...register("experience.endDate", {
+                          valueAsDate: true,
+                        })}
                       />
                       <p className="text-warning mt-2">
                         {errors.experience?.endDate?.message}
@@ -563,7 +594,9 @@ export default function ProfileForm({ defaultValues }) {
             )}
             {tabValue === "4" && (
               <div className="flex items-start flex-col">
-                <p className="text-grey ml-auto md:text-right sm:text-right">Write about your skills</p>
+                <p className="text-grey ml-auto md:text-right sm:text-right">
+                  Write about your skills
+                </p>
                 <label htmlFor="skills" className="block text-lightBlue mb-2">
                   Your Skills
                 </label>

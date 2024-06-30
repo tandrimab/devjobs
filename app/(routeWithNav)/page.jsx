@@ -1,7 +1,7 @@
 "use client"
-import JobCardBase from "./JobCardBase";
-import FilterJobs from "./(filter)/FilterJobs";
-import {useStore} from "./store/store";
+import JobCardBase from "../../components/JobCardBase";
+import FilterJobs from "../../components/FilterJobs";
+import {useStore} from "../store/store";
 import { useState, useEffect } from "react";
 
 

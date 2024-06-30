@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import useWindowSize from "@/utilities/hooks/useWindowSize";
-import ProfileMob from "./(navProfile)/ProfileMob";
-import ProfileWeb from "./(navProfile)/ProfileWeb";
+import ProfileMob from "./ProfileMob";
+import ProfileWeb from "./ProfileWeb";
 import { useEffect, useState } from "react";
 import { decode } from "@/utilities/backend/jwt";
 

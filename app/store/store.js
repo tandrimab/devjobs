@@ -29,3 +29,15 @@ export const usePathStore = create(
     }
   )
 );
+
+export const useUserdetails = create(
+  persist(
+    (set) => ({
+      isUserDetailsUploaded: false,
+      assertUserDetailsUploaded: (val) => set(val)
+    }),
+    {
+      name: 'isUserDetailsUploaded'
+    }
+  )
+)

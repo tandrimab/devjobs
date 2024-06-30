@@ -1,7 +1,21 @@
 import Image from "next/image";
 import Carousel from "./Carousel";
+import LoginButtons from "./LoginButtons";
+import { useEffect, useState } from "react";
 
 export default function WelcomePage({ items, bg }) {
+  const [startAnimation, setStartAnimation] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setStartAnimation(true);
+    }, 3800);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [startAnimation]);
+
   return (
     <div className="w-full h-[100vh]">
       <div className="h-full w-full absolute" style={{
@@ -29,7 +43,10 @@ export default function WelcomePage({ items, bg }) {
             <div className="animate-underlineText bg-violet transition-all h-2 w-0" />
           </div>
         </div>
-        <Carousel items={items} />
+        {startAnimation && <div className="flex md:flex-row sm:flex-col md:justify-between sm:justify-around items-center w-full md:max-w-[70%] sm:max-w-full sm:h-full">
+        <Carousel items={items} startAnimation />
+        <LoginButtons  />
+        </div>}
       </div>
     </div>
   );
