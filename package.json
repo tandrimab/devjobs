@@ -11,6 +11,7 @@
   "dependencies": {
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
+    "@reach/combobox": "^0.18.0",
     "i": "^0.3.7",
     "jose": "^5.4.0",
     "jsonwebtoken": "^9.0.2",
@@ -24,6 +25,7 @@
     "react-google-autocomplete": "^2.7.3",
     "react-hook-form": "^7.51.3",
     "react-toastify": "^10.0.5",
+    "use-places-autocomplete": "^4.0.1",
     "uuid4": "^2.0.3",
     "zod": "^3.23.0",
     "zustand": "^4.5.0"
