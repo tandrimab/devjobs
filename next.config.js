@@ -19,7 +19,7 @@ const nextConfig = {
     MONGODB_URI:
       "mongodb+srv://bhattacharjeetan:9veub0jLNF56g1Lj@cluster0.6hewuvz.mongodb.net/devjobs",
 
-    GOOGLE_MAP_API_KEY: "AIzaSyATc5OPGdXedTO0Lmr_rCAKJuRknJspXt0",
+    GOOGLE_MAP_API_KEY: "AIzaSyAqFKw-zJsjL4vhwFjaQ0wf73D2-iZHUog",
   },
 };
 
