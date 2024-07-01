@@ -8,7 +8,6 @@ export default function FilterJobs() {
     const [searchTitle, setSearchTitle] = useState('');
     const [area, setArea] = useState('');
     const [isFulltime, setIsFulltime] = useState();
-    const  [shrinkFilter, setShrinkFilter] = useState();
     const [windowWidth, _] = useWindowSize();
 
     const updateFullTime = (e) => {

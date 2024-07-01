@@ -55,13 +55,13 @@ module.exports = {
         },
         slide: {
           "0%": {
-            top: "2px",
-            opacity: "1",
+            top: "10px",
+            opacity: "0",
           },
           "50%": {
-            top: "-4px",
-            opacity: "0.5",
-          },
+            top: "0px",
+            opacity: "1",
+          },          
           "100%": {
             top: "-10px",
             opacity: "0",
@@ -158,7 +158,7 @@ module.exports = {
       },
       animation: {
         btnAnimated: "rotate 1s linear",
-        sliderUp: "slide 1.8s linear",
+        sliderUp: "slide 2s ease",
         zoomText: "zoom .75s linear forwards",
         underlineText: "underline .75s 2.5s linear forwards",
         showText: "focus .75s 1s linear forwards",

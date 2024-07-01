@@ -43,7 +43,7 @@ export default function WelcomePage({ items, bg }) {
             <div className="animate-underlineText bg-violet transition-all h-2 w-0" />
           </div>
         </div>
-        {startAnimation && <div className="flex md:flex-row sm:flex-col md:justify-between sm:justify-around items-center w-full md:max-w-[70%] sm:max-w-full sm:h-full">
+        {startAnimation && <div className="flex lg:flex-row sm:flex-col lg:justify-between sm:justify-around items-center w-full md:max-w-[70%] sm:max-w-full sm:h-full">
         <Carousel items={items} startAnimation />
         <LoginButtons  />
         </div>}
