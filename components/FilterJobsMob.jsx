@@ -38,18 +38,20 @@ export default function FilterJobsMob(props) {
               alt="location"
             />
             <input
+              name="location"
               type="text"
               placeholder="Filter by location…"
-              value={props.area}
-              onChange={(e) => props.setArea(e.target.value)}
+              value={props.filters.location}
+              onChange={props.handleSearchInput}
               className="outline-none w-full bg-transparent"
             />
           </div>
           <label className="flex items-center justify-start p-4 rounded-tr-[6px] rounded-br-[6px]">
             <input
+              name="isFulltime"
               type="checkbox"
-              checked={props.isFulltime}
-              onChange={props.updateFullTime}
+              checked={props.filters.isFulltime}
+              onChange={props.handleSearchInput}
               className="peer appearance-none rounded-[3px] ring-0 bg-veryLightBlue w-[24px] h-[24px] checked:bg-lightBlue my-2 mx-4 relative shrink-0"
             />
             <label className="font-bold">Full Time Only</label>

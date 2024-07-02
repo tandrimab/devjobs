@@ -1,24 +1,25 @@
 "use client"
 import JobCardBase from "../../components/JobCardBase";
 import FilterJobs from "../../components/FilterJobs";
-import {useStore} from "../store/store";
+import {useFilteredJobs, useStore} from "../store/store";
 import { useState, useEffect } from "react";
 
 
 export default function Home() {
-  const [jobDetails, setJobDetails] = useState([]);
   const setJobs = useStore((state) => state.setJobs);
   const jobs = useStore((state) => state.jobs);
+  const setFilteredJobs = useFilteredJobs((state) => state.setFilteredJobs);
+  const filteredJobs = useFilteredJobs((state) => state.filteredJobs);
+
+  const filtered = filteredJobs.length ? filteredJobs : jobs; 
 
     useEffect(() => {
         async function fetchAPI() {
-            if (jobs.length) {
-              setJobDetails(jobs);
-            } else {
+            if (!jobs.length) {
               const res = await fetch('http://localhost:3000/api/jobs', {next:{revalidate: 3600}} );
               const data = await res.json();
-              setJobDetails(data);
-              setJobs(data);
+              setJobs([...data]);
+              setFilteredJobs(data);
             }
         }
         fetchAPI();
@@ -26,10 +27,10 @@ export default function Home() {
   
   return (
     
-    <main className=" min-h-screen flex items-center justify-between flex-col lg:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-3rem] sm:mt-[-2rem] relative">
+    <main className=" min-h-screen flex items-center flex-col lg:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-3rem] sm:mt-[-2rem] relative">
       <FilterJobs />
       <div className="grid lg:gap-12 lg:grid-cols-3 place-content-center w-full mt-12 md:grid-cols-2 md:gap-3 gap-0 sm:grid-cols-1 mb-6">
-      {jobDetails && jobDetails.length ? jobDetails.map((item, id) => (
+      {filtered && filtered.length ? filtered.map((item, id) => (
         <JobCardBase data={item} id={id} />
       )) : null}
       </div>

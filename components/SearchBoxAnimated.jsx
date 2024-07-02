@@ -25,9 +25,10 @@ export default function SearchBoxAnimated(props) {
         alt="search"
       />
       <input
+      name="position"
         type="text"
-        value={props.searchTitle}
-        onChange={(e) => props.setSearchTitle(e.target.value)}
+        value={props.filters.position}
+        onChange={props.handleSearchInput}
         className="outline-none w-full bg-transparent peer z-[999]"
       />
 
