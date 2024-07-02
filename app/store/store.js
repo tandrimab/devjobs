@@ -10,7 +10,6 @@ export const useStore = create(
           ...state,
           jobs,
         })),
-      setPrevPath: (path) => set(path),
     }),
     {
       name: "jobs",
@@ -34,10 +33,25 @@ export const useUserdetails = create(
   persist(
     (set) => ({
       isUserDetailsUploaded: false,
-      assertUserDetailsUploaded: (val) => set(val)
+      assertUserDetailsUploaded: (val) => set(val),
     }),
     {
-      name: 'isUserDetailsUploaded'
+      name: "isUserDetailsUploaded",
     }
   )
-)
+);
+
+export const useFilteredJobs = create(
+  persist(
+    (set) => ({
+      filteredJobs: [],
+      setFilteredJobs: (filteredJobs) => 
+        set((state) => ({
+          filteredJobs,
+        })),
+    }),
+    {
+      name: "filteredJobs",
+    }
+  )
+);
