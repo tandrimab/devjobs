@@ -55,29 +55,28 @@ module.exports = {
         },
         slide: {
           "0%": {
-            top: "10px",
-            opacity: "0",
+           top: "10px",
+           opacity: "0",
           },
-          "50%": {
-            top: "0px",
-            opacity: "1",
-          },          
+         "50%": {
+           top: "0px",
+           opacity: "1",
+         },          
           "100%": {
-            top: "-10px",
+           top: "-10px",
             opacity: "0",
           },
         },
         slideLeft: {
           "0%": {
             opacity: "0",
-            transform: "translate(0%, 0%)",
-          },
-          "50%": {
-            opacity: "1",
+            transform: "translate(100%, 0%)",
+            color: 'white'
           },
           "100%": {
             opacity: "1",
-            transform: "translate(-100%, 0%) ",
+            transform: "translate(0%, 0%)",
+            color: 'white'
           },
         },
         zoom: {
@@ -85,10 +84,17 @@ module.exports = {
             color: "transparent",
             transform: "scale(0,0)",
           },
-          "100%": {
+          "50%": {
             color: "white",
             transform: "scale(1,1)",
           },
+          "75%": {
+            color: "white",
+            transform: "scale(1,1)",
+          },
+          "100%": {
+            transform: 'scale(0,0)'
+          }
         },
         underline: {
           "0%": {
@@ -106,7 +112,7 @@ module.exports = {
           "100%": {
             opacity: "1",
             display: "block",
-            color: "rgba(89, 100, 224, 1)",
+            color: "#121721",
           },
         },
         scaleOut: {
@@ -155,20 +161,32 @@ module.exports = {
             transform: "translate(0%, 0%)",
           }
         },
+        btnZoom: {
+          "0%": {
+            transform: "scale(1, 1)"
+          },
+          "100%": {
+            transform: "scale(1.2, 1.2)"
+          }
+        },
       },
       animation: {
         btnAnimated: "rotate 1s linear",
         sliderUp: "slide 2s ease",
-        zoomText: "zoom .75s linear forwards",
+        zoomText: "zoom .5s linear forwards",
         underlineText: "underline .75s 2.5s linear forwards",
-        showText: "focus .75s 1s linear forwards",
+        showText: "focus 1s 2.5s linear forwards",
         scaleOutBox: "scaleOut 1.5s 4s linear forwards",
         hideOut: "hide 1s 3s linear forwards",
-        sliderLeft: "slideLeft 8s ease-in-out infinite",
-        zoomInOutText: "zoom 8s 1s ease-in-out",
+        sliderLeft: "slideLeft 3.25s 2s ease-in-out forwards",
+        zoomInOutText: "zoom 3s ease-in-out",
         scaleImage: "scaleImage 1s ease-in-out 1 forwards",
         scaleRight: "scaleToRight 1s ease-in-out 1 forwards",
+        btnZoom: "btnZoom .5s ease-in"
       },
+      boxShadow: {
+        'blue-border': '0 0 15px #5964E0'
+      }
     },
     fontFamily: {
       bold: ["Kumbh sans_bold"],
