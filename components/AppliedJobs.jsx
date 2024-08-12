@@ -6,11 +6,11 @@ import Link from "next/link";
 export default function AppliedJobs({ data }) {
   const dayDiff = Math.floor((Date.now() - new Date(data?.createdAt)) / (1000 * 60 * 60 * 24));
   const hourDiff = Math.floor(((Date.now() - new Date(data?.createdAt)) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  
+
   return (
-    <div className="relative cursor-pointer w-full flex items-center shadow-[0_0_25px_#9DAEC2] bg-white hover:transition-all hover:delay-100 hover:duration-500 hover:scale-110 rounded-[12px] mt-4">
+    <div className="relative cursor-pointer w-full flex items-center shadow-[0_0_25px_#9DAEC2] bg-white hover:transition-all hover:delay-100 hover:duration-500 hover:scale-110 rounded-[12px] md:mt-4 sm:mt-8">
       <div
-        className="md:w-[140px] md:h-[140px] sm:w-[3rem] sm:h-[3rem] sm:p-4 flex items-center relative sm:mt-[-1rem] md:mt-0"
+        className="md:w-[140px] md:h-[140px] sm:w-[3rem] sm:h-[3rem] sm:p-4 flex items-center relative sm:translate-y-[-40px] sm:translate-x-[-10px] md:translate-x-0 md:translate-y-0"
         style={{ backgroundColor: data?.companyDetails?.logoBackground }}
       >
         <Image
@@ -22,14 +22,14 @@ export default function AppliedJobs({ data }) {
         />
       </div>
       <Link href={"/jobs/" + data?.details?.id}>
-        <div className="flex flex-col justify-evenly h-full ml-3">
+        <div className="flex flex-col justify-evenly h-full ml-3 sm:py-4">
           <div className="flex text-darkGrey font-base">
             <p className="">{`${dayDiff}days ${hourDiff}h ago`}</p>
             <div className="rounded-full bg-darkGrey h-[4px] w-[4px] mx-4 my-auto" />
             <p>{data?.details?.contract}</p>
           </div>
-          <p className="text-xl font-medium mt-3">{data?.companyDetails?.name}</p>
-          <p className="text-base text-darkBlue font-medium mt-3">
+          <p className="text-xl font-medium md:mt-3 sm:mt-1">{data?.companyDetails?.name}</p>
+          <p className="text-base text-darkBlue font-medium md:mt-3 sm:mt-1">
             {data?.details?.position}
           </p>
         </div>
