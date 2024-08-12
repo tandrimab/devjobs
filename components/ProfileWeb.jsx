@@ -2,6 +2,7 @@ import Switch from "@/components/Switch";
 import { mdiAccountCircle } from "@mdi/js";
 import Icon from "@mdi/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProfileWeb({ session, login, signout }) {
     return (
@@ -27,6 +28,7 @@ export default function ProfileWeb({ session, login, signout }) {
                             </div>
 
                         </div>
+                        <Link href="/appliedCompanies" className="px-6 py-4 font-medium w-full text-left">Applied Companies</Link>
                         <div>
                             <button className="px-6 py-4 font-medium w-full text-left" onClick={signout}>Logout</button>
                         </div>

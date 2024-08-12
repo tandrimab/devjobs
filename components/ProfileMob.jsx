@@ -2,6 +2,7 @@ import Switch from "@/components/Switch";
 import { mdiMenu } from "@mdi/js";
 import Icon from "@mdi/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProfileMob({ session, login, signout }) {
     return (
@@ -19,7 +20,7 @@ export default function ProfileMob({ session, login, signout }) {
                         <p className="font-bold">{session?.name}</p>
                         <p className="font-medium">{session?.email}</p>
                     </div>
-
+                    <Link href="/appliedCompanies" className="px-6 py-4 font-medium w-full text-left">Applied Companies</Link>
                 </div> : null}
                 <div className="flex item-center ml-auto my-auto px-6 py-4 justify-between">
                     <p>Theme</p>
