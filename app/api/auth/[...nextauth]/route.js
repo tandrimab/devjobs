@@ -45,7 +45,6 @@ export const authOptions = {
     },
     async jwt({ token, account, profile }) {
       token.id = token?.sub || account?.providerAccountId || profile?.id;
-
       if (account) {
         token.access_token = account.access_token;
         token.expires_at = account.expires_at;
@@ -57,20 +56,19 @@ export const authOptions = {
         if (!token.refresh_token) throw new Error("Missing refresh token");
 
         try {
-
-          const url = oauthEndpoint[token?.provider?.url]
+          const url = oauthEndpoint[token?.provider]?.url
           const response = await fetch(url, {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
 
             body: new URLSearchParams({
-              client_id: token?.provider?.id,
-              client_secret: token?.provider?.secret,
+              client_id: oauthEndpoint[token?.provider]?.id,
+              client_secret: oauthEndpoint[token?.provider]?.secret,
               grant_type: "refresh_token",
               refresh_token: token.refresh_token,
             }),
 
             method: "POST",
-          });
+          });          
 
           const tokens = await response.json();
 
@@ -84,12 +82,15 @@ export const authOptions = {
           };
         } catch (error) {
           console.error("Error refreshing access token", error);
-          return { ...token, error: "RefreshAccessTokenError" };
+          token.error = error;
         }
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, error }) {
+      if (token.error) {
+        return {}
+      }
       let responseJson;
       try {
         let signedData = await encode({
