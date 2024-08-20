@@ -45,18 +45,26 @@ export const authOptions = {
     },
     async jwt({ token, account, profile }) {
       token.id = token?.sub || account?.providerAccountId || profile?.id;
+      token.error={};
       if (account) {
         token.access_token = account.access_token;
         token.expires_at = account.expires_at;
         token.refresh_token = account.refresh_token;
-        token.provider = account.provider;
+        token.provider = account.provider;        
       } else if (Date.now() < token.expires_at * 1000) {
         return token;
       } else {
         if (!token.refresh_token) throw new Error("Missing refresh token");
 
         try {
-          const url = oauthEndpoint[token?.provider]?.url
+          const url = oauthEndpoint[token?.provider]?.url;
+          const body = new URLSearchParams({
+            client_id: oauthEndpoint[token?.provider]?.id,
+            client_secret: oauthEndpoint[token?.provider]?.secret,
+            grant_type: "refresh_token",
+            refresh_token: token.refresh_token,
+          })
+          
           const response = await fetch(url, {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
 
@@ -73,6 +81,8 @@ export const authOptions = {
           const tokens = await response.json();
 
           if (!response.ok) throw tokens;
+          
+          token.error = {};
 
           return {
             ...token,
@@ -88,7 +98,7 @@ export const authOptions = {
       return token;
     },
     async session({ session, token, error }) {
-      if (token.error) {
+      if (token.error && Object.keys(token.error).length) {
         return {}
       }
       let responseJson;
@@ -110,7 +120,7 @@ export const authOptions = {
           body: JSON.stringify({ token: signedData }),
         });
 
-        responseJson = await response.json();
+        responseJson = await response.json();        
 
         if (!responseJson.success) {
           throw responseJson;
@@ -127,7 +137,7 @@ export const authOptions = {
           image: token?.picture,
         },
       });
-
+      
       session.user = sessionDataSigned;
       return session;
     },
