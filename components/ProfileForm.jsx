@@ -19,6 +19,13 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
+import useWindowSize from "@/utilities/hooks/useWindowSize";
+import Image from "next/image";
+import Icon from "@mdi/react";
+import { mdiCardAccountDetailsOutline } from "@mdi/js";
+import { mdiBookEducationOutline } from "@mdi/js";
+import { mdiApplicationEditOutline } from "@mdi/js";
+import { mdiBriefcaseOutline } from "@mdi/js";
 
 export default function ProfileForm({ defaultValues }) {
   const router = useRouter();
@@ -52,6 +59,8 @@ export default function ProfileForm({ defaultValues }) {
     },
   });
 
+  const [width, _] = useWindowSize();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "application.skills",
@@ -82,21 +91,6 @@ export default function ProfileForm({ defaultValues }) {
 
         delete profileDetails.selectedTab;
 
-        // let skills = profileDetails?.application?.skills;
-
-        // if (skills.length) {
-        //   let skillsArr = [];
-
-        //   for (let val of skills) {
-
-        //     skillsArr.push(Object.values(val));
-
-        //   }
-        //   profileDetails.application = {
-        //     ...profileDetails.application,
-        //     skills: skillsArr
-        //   }
-        // }
         const options = {
           method: "POST",
           header,
@@ -232,426 +226,482 @@ export default function ProfileForm({ defaultValues }) {
   };
 
   const handleLocationSelect = (description) => {
-    // e.preventDefault();
     setPlacesValue(description, false);
     setValue("personalDetails.location", description);
     clearSuggestions();
   };
 
   return (
-    <div className=" min-h-screen lg:max-w-[50%] md:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-4 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-2rem] sm:mt-[-1rem] relative bg-white">
-      <div className="flex md:flex-row sm:flex-col justify-between">
-        <section className="flex md:flex-col sm:flex-row sm:items-center">
-          <div
-            className={
-              "md:my-8 sm:my-2 md:pr-6 sm:pr-2 py-2 lg:hover:bg-transparent border-lightViolet  md:text-base sm:text-sm w-full " +
-              (tabValue === "1"
-                ? "md:border-r-4 md:border-b-0 sm:border-b-4 text-lightViolet font-bold"
-                : "font-medium")
-            }
-          >
-            <div
-              className="cursor-pointer block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet"
-              onClick={() => setValue("selectedTab", "1")}
-            >
-              <span className="pb-4 md:pb-0">Personal Details</span>
-            </div>
-          </div>
-          <div
-            className={
-              "my-8 md:pr-6 sm:pr-2 py-4 lg:hover:bg-transparent border-lightViolet md:text-base sm:text-sm w-full " +
-              (tabValue === "2"
-                ? "md:border-r-4 md:border-b-0 sm:border-b-4 text-lightViolet font-bold"
-                : "font-medium")
-            }
-          >
-            <div
-              className="cursor-pointer block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet"
-              onClick={() => setValue("selectedTab", "2")}
-            >
-              <span className="pb-4 md:pb-0">Education</span>
-            </div>
-          </div>
-          <div
-            className={
-              "my-8 md:pr-6 sm:pr-2 py-2 lg:hover:bg-transparent border-lightViolet md:text-base sm:text-sm w-full " +
-              (tabValue === "3"
-                ? "md:border-r-4 md:border-b-0 sm:border-b-4 text-lightViolet font-bold"
-                : "font-medium")
-            }
-          >
-            <div
-              className="cursor-pointer block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet"
-              onClick={() => setValue("selectedTab", "3")}
-            >
-              <span className="pb-4 md:pb-0">Work Experience</span>
-            </div>
-          </div>
-          <div
-            className={
-              "my-8 md:pr-6 sm:pr-2 py-4 lg:hover:bg-transparent border-lightViolet md:text-base sm:text-sm w-full " +
-              (tabValue === "4"
-                ? "md:border-r-4 md:border-b-0 sm:border-b-4 text-lightViolet font-bold"
-                : "font-medium")
-            }
-          >
-            <div
-              className="cursor-pointer block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet"
-              onClick={() => setValue("selectedTab", "4")}
-            >
-              <span className="pb-4 md:pb-0">Application</span>
-            </div>
-          </div>
-        </section>
-        <div className="px-8 md:w-[80%] sm:w-auto">
-          <form
-            className="w-full mt-8"
-            onSubmit={handleSubmit(submitProfile, (e) =>
-              console.log("error", e)
-            )}
-          >
-            {tabValue === "1" && (
-              <div className="flex items-start flex-col">
-                <p className="text-grey ml-auto mb-4 md:text-right sm:text-right">
+    <div className=" min-h-screen flex justify-center mt-4 ">
+      <div className={"m-4 shadow-black-white rounded-[12px] bg-lightGrey mx-auto flex justify-between max-w-[1100px] w-[80%] min-h-[700px] " + (width < 991 ? "flex-col" : "flex-row max-h-[800px]")}>
+        <div className={"bg-btnLightHover  max-w-[700px] " + (width < 991 ? "w-[100%] min-h-[450px] rounded-[12px] " : "w-[35%] rounded-[50px] rounded-l-[12px]")}>
+          {tabValue === "1" && (
+            <div className="flex flex-col my-auto justify-center items-center h-full p-4">
+              <p className="text-3xl mb-12 text-veryDarkBlue">Personal Details</p>
+              <div className="relative">
+                <Image
+                  src="/assets/desktop/details.svg"
+                  height={300}
+                  width={300}
+                  alt="personal-details"
+                />
+              </div>
+              <p className="text-sm mt-4 text-center">
                   Tell us about yourself so the startups know who you are
                 </p>
-                <label className="block text-lightBlue mb-2">Full name</label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("personalDetails.name", { required: true })}
+            </div>
+          )}
+          {tabValue === "2" && (
+            <div className="flex flex-col my-auto justify-center items-center h-full p-4">
+              <p className="text-3xl mb-12 text-veryDarkBlue">Education</p>
+              <div className="relative">
+                <Image
+                  src="/assets/desktop/education.svg"
+                  height={300}
+                  width={300}
+                  alt="education"
                 />
-                <p className="text-warning mt-2">
-                  {errors.personalDetails?.name?.message}
-                </p>
-                <label className="block text-lightBlue mb-2">Email</label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("personalDetails.email", { required: true })}
-                />
-                <p className="text-warning mt-2">
-                  {errors.personalDetails?.email?.message}
-                </p>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Location
-                </label>
-                <Combobox
-                  onSelect={handleLocationSelect}
-                  aria-labelledby="demo"
-                  className="w-full"
-                >
-                  <ComboboxInput
-                    className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                    value={value}
-                    onChange={handleLocationInput}
-                    disabled={!ready}
-                  />
-                  <ComboboxPopover className="bg-lightGrey px-4 shadow-xl">
-                    <ComboboxList>
-                      {status === "OK" &&
-                        data.map(({ place_id, description }) => (
-                          <ComboboxOption
-                            key={place_id}
-                            value={description}
-                            className="mt-3"
-                          />
-                        ))}
-                    </ComboboxList>
-                  </ComboboxPopover>
-                </Combobox>
-                <p className="text-warning mt-2">
-                  {errors.personalDetails?.location?.message}
-                </p>
-                <div className="flex lg:flex-row mt-8 justify-between flex-wrap w-full sm:items-start">
-                  <div className="flex lg:mb-0 items-center sm:mb-8">
-                    <label htmlFor="role" className="text-lightBlue mr-4">
-                      Role
-                    </label>
-                    <select
-                      id="role"
-                      className="bg-transparent p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 sm:w-full lg:w-auto"
-                      {...register("personalDetails.role")}
-                    >
-                      {roles.map((role, i) => (
-                        <option key={`role-${i}`} value={role}>
-                          {role}
-                        </option>
-                      ))}
-                    </select>
-                    <p className="text-warning mt-2">
-                      {errors.personalDetails?.role?.message}
-                    </p>
-                  </div>
-                  <div className="flex items-center">
-                    <label
-                      htmlFor="experience"
-                      className="block text-lightBlue mr-4"
-                    >
-                      Years of Experience
-                    </label>
-                    <select
-                      id="experience"
-                      className="bg-transparent p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1"
-                      {...register("personalDetails.experience")}
-                    >
-                      {yearsOfExperience.map((experience, i) => (
-                        <option key={`experience-${i}`} value={experience}>
-                          {experience}
-                        </option>
-                      ))}
-                    </select>
-                    <p className="text-warning mt-2">
-                      {errors.personalDetails?.experience?.message}
-                    </p>
-                  </div>
-                </div>
-                <label
-                  htmlFor="socialProfile"
-                  className="block text-lightBlue mb-2 mt-8"
-                >
-                  Social Profile
-                </label>
-                <input
-                  id="socialProfile"
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("personalDetails.socialProfile")}
-                />
-                <p className="text-warning mt-2">
-                  {errors.personalDetails?.socialProfile?.message}
-                </p>
-
-                <button
-                  // type="submit"
-                  onClick={async () => {
-                    await trigger("personalDetails");
-                  }}
-                  className="py-3 px-8 mt-8 ml-auto transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px]"
-                >
-                  Next
-                </button>
               </div>
-            )}
-            {tabValue === "2" && (
-              <div className="flex items-start flex-col">
-                <p className="text-grey ml-auto md:text-right sm:text-right">
+              <p className="text-sm mt-4 text-center">
                   Tell us about your education
                 </p>
-                <label className="block text-lightBlue mb-2">
-                  College / University
-                </label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.college")}
+            </div>
+          )}
+          {tabValue === "3" && (
+            <div className="flex flex-col my-auto justify-center items-center h-full p-4">
+              <p className="text-3xl mb-12 text-veryDarkBlue">Work Experience</p>
+              <div className="relative">
+                <Image
+                  src="/assets/desktop/work.svg"
+                  height={300}
+                  width={300}
+                  alt="work-experience"
                 />
-                <p className="text-warning mt-2">
-                  {errors.education?.college?.message}
-                </p>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Graduated on
-                </label>
-                <input
-                  type="date"
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.graduationDate", {
-                    valueAsDate: true,
-                  })}
-                />
-                <p className="text-warning mt-2">
-                  {errors.education?.graduationDate?.message}
-                </p>
-                <div className="flex lg:flex-row items-center mt-8 flex-wrap w-full">
-                  <label htmlFor="degree" className="text-lightBlue mr-4">
-                    Degree
-                  </label>
-                  <select
-                    id="degree"
-                    className="flex-grow bg-transparent p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1"
-                    {...register("education.degree")}
-                  >
-                    {degrees.map((degree) => (
-                      <option value={degree}>{degree}</option>
-                    ))}
-                  </select>
-                  <p className="text-warning mt-2">
-                    {errors.education?.degree?.message}
-                  </p>
-                </div>
-                <label className="block text-lightBlue mb-2 mt-8">Major</label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.major")}
-                />
-                <p className="text-warning mt-2">
-                  {errors.education?.major?.message}
-                </p>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Score (GPA)
-                </label>
-                <input
-                  type="number"
-                  className="p-2 appearance-none w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("education.gpa", {
-                    valueAsNumber: true,
-                  })}
-                />
-                <p className="text-warning mt-2">
-                  {errors.education?.gpa?.message}
-                </p>
-                <button
-                  type="submit"
-                  className="py-3 px-8 mt-8 ml-auto transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px]"
-                >
-                  Next
-                </button>
               </div>
-            )}
-            {tabValue === "3" && (
-              <div className="flex items-start flex-col">
-                <p className="text-grey ml-auto md:text-right sm:text-right">
+              <p className="text-sm mt-4 text-center">
                   Tell us about your work experience
                 </p>
-                <label className="block text-lightBlue mb-2">Company</label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("experience.company")}
+            </div>
+          )}
+          {tabValue === "4" && (
+            <div className="flex flex-col my-auto justify-center items-center h-full p-4">
+              <p className="text-3xl mb-12 text-veryDarkBlue">Application</p>
+              <div className="relative">
+                <Image
+                  src="/assets/desktop/application.svg"
+                  height={200}
+                  width={200}
+                  alt="application"
                 />
-                <p className="text-warning mt-2">
-                  {errors.experience?.company?.message}
+              </div>
+              <p className="text-sm mt-4 text-center">
+                  Write about your skills
                 </p>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Position
-                </label>
-                <input
-                  className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("experience.position")}
+            </div>
+          )}
+        </div>
+        <div className={"max-w-[600px] flex-grow m-auto " + (width < 991 && "w-[90%]")}>
+          <div className={"flex m-auto shadow-black-white justify-between py-2 px-4 " + (width < 991 ? "w-[90%] mt-6" : "w-[70%]")}>
+              <span
+                onClick={() => setValue("selectedTab", "1")}
+                className={
+                  "cursor-pointer m-auto flex justify-center items-center " +
+                  (tabValue === "1"
+                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto "
+                    : "font-medium")
+                }
+              >
+                <Icon
+                  path={mdiCardAccountDetailsOutline}
+                  size={1.5}
+                  className="text-darkBlue"
                 />
-                <p className="text-warning mt-2">
-                  {errors.experience?.position?.message}
-                </p>
-                <div className="flex items-center justify-between w-full flex-wrap">
-                  <div className="flex lg:flex-row items-center mt-8">
-                    <label
-                      htmlFor="startDate"
-                      className="text-lightBlue mr-4 whitespace-nowrap mb-2"
-                    >
-                      Started On
-                    </label>
-                    <input
-                      type="date"
-                      id="startDate"
-                      className="bg-transparent p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1"
-                      {...register("experience.startDate", {
-                        valueAsDate: true,
-                      })}
+              </span>
+
+              <span
+                onClick={() => setValue("selectedTab", "2")}
+                className={
+                  "cursor-pointer m-auto flex justify-center items-center " +
+                  (tabValue === "2"
+                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    : "font-medium")
+                }
+              >
+                <Icon
+                  path={mdiBookEducationOutline}
+                  size={1.5}
+                  className="text-darkBlue"
+                />
+              </span>
+              <span
+                onClick={() => setValue("selectedTab", "3")}
+                className={
+                  "cursor-pointer m-auto flex justify-center items-center " +
+                  (tabValue === "3"
+                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    : "font-medium")
+                }
+              >
+                <Icon
+                  path={mdiBriefcaseOutline}
+                  size={1.5}
+                  className="text-darkBlue"
+                />
+              </span>
+              <span
+                onClick={() => setValue("selectedTab", "4")}
+                className={
+                  "cursor-pointer m-auto flex justify-center items-center " +
+                  (tabValue === "4"
+                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    : "font-medium")
+                }
+              >
+                <Icon
+                  path={mdiApplicationEditOutline}
+                  size={1.5}
+                  className="text-darkBlue"
+                />
+              </span>
+          </div>
+          <div>
+            <form
+              className="w-full mt-8 px-4"
+              onSubmit={handleSubmit(submitProfile, (e) =>
+                console.log("error", e)
+              )}
+            >
+              {tabValue === "1" && (
+                <div className="flex items-start flex-col">
+                  <label className="block text-lightBlue mb-2 ">Full name</label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("personalDetails.name", { required: true })}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.personalDetails?.name?.message}
+                  </p>
+                  <label className="block text-lightBlue mb-2">Email</label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("personalDetails.email", { required: true })}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.personalDetails?.email?.message}
+                  </p>
+                  <label className="block text-lightBlue mb-2 mt-2">
+                    Location
+                  </label>
+                  <Combobox
+                    onSelect={handleLocationSelect}
+                    aria-labelledby="demo"
+                    className="w-full"
+                  >
+                    <ComboboxInput
+                      className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                      value={value}
+                      onChange={handleLocationInput}
+                      disabled={!ready}
                     />
+                    <ComboboxPopover className="bg-lightGrey px-4 shadow-xl">
+                      <ComboboxList>
+                        {status === "OK" &&
+                          data.map(({ place_id, description }) => (
+                            <ComboboxOption
+                              key={place_id}
+                              value={description}
+                              className="mt-3"
+                            />
+                          ))}
+                      </ComboboxList>
+                    </ComboboxPopover>
+                  </Combobox>
+                  <p className="text-warning mt-2">
+                    {errors.personalDetails?.location?.message}
+                  </p>
+                  <div className="flex lg:flex-row mt-4 mb-4 justify-between md:flex-nowrap sm:flex-wrap w-full sm:items-start">
+                    <div className="flex lg:mb-0 items-center sm:mb-8">
+                      <label htmlFor="role" className="text-lightBlue mr-4">
+                        Role
+                      </label>
+                      <select
+                        id="role"
+                        className="p-4 rounded-[5px] focus:border-veryLightBlue outline-none bg-btnVeryLight sm:w-full lg:w-auto"
+                        {...register("personalDetails.role")}
+                      >
+                        {roles.map((role, i) => (
+                          <option key={`role-${i}`} value={role}>
+                            {role}
+                          </option>
+                        ))}
+                      </select>
+                      <p className="text-warning mt-2">
+                        {errors.personalDetails?.role?.message}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="experience"
+                        className="block text-lightBlue mr-4"
+                      >
+                        Years of Experience
+                      </label>
+                      <select
+                        id="experience"
+                        className="p-4 rounded-[5px] focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                        {...register("personalDetails.experience")}
+                      >
+                        {yearsOfExperience.map((experience, i) => (
+                          <option key={`experience-${i}`} value={experience}>
+                            {experience}
+                          </option>
+                        ))}
+                      </select>
+                      <p className="text-warning mt-2">
+                        {errors.personalDetails?.experience?.message}
+                      </p>
+                    </div>
+                  </div>
+                  <label
+                    htmlFor="socialProfile"
+                    className="block text-lightBlue mb-2 mt-2"
+                  >
+                    Social Profile
+                  </label>
+                  <input
+                    id="socialProfile"
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("personalDetails.socialProfile")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.personalDetails?.socialProfile?.message}
+                  </p>
+
+                  <button
+                    onClick={async () => {
+                      await trigger("personalDetails");
+                    }}
+                    className={"py-3 px-8 mt-8 transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px] " + (width < 991 ? "mx-auto mb-4 w-[90%]" : "ml-auto")}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              {tabValue === "2" && (
+                <div className="flex items-start flex-col">
+                  <label className="block text-lightBlue mb-2">
+                    College / University
+                  </label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("education.college")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.education?.college?.message}
+                  </p>
+                  <label className="block text-lightBlue mb-2">
+                    Graduated on
+                  </label>
+                  <input
+                    type="date"
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("education.graduationDate", {
+                      valueAsDate: true,
+                    })}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.education?.graduationDate?.message}
+                  </p>
+                  <div className="flex lg:flex-row items-center mt-8 flex-wrap w-full">
+                    <label htmlFor="degree" className="text-lightBlue mr-4">
+                      Degree
+                    </label>
+                    <select
+                      id="degree"
+                      className="flex-grow p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                      {...register("education.degree")}
+                    >
+                      {degrees.map((degree) => (
+                        <option value={degree}>{degree}</option>
+                      ))}
+                    </select>
                     <p className="text-warning mt-2">
-                      {errors.experience?.startDate?.message}
+                      {errors.education?.degree?.message}
                     </p>
                   </div>
-                  {!watch("experience").stillWorking && (
-                    <div className="animate-fadeIn flex lg:flex-row items-center mt-8 ">
-                      <label className="text-lightBlue mr-4 whitespace-nowrap mb-2">
-                        Last Date
+                  <label className="block text-lightBlue mb-2 mt-2">
+                    Major
+                  </label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("education.major")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.education?.major?.message}
+                  </p>
+                  <label className="block text-lightBlue mb-2">
+                    Score (GPA)
+                  </label>
+                  <input
+                    type="number"
+                    className="p-4 appearance-none w-full rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("education.gpa", {
+                      valueAsNumber: true,
+                    })}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.education?.gpa?.message}
+                  </p>
+                  <button
+                    type="submit"
+                    className={"py-3 px-8 mt-8 transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px] " + (width < 991 ? "mx-auto mb-4 w-[90%]" : "ml-auto")}
+                    
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+              {tabValue === "3" && (
+                <div className="flex items-start flex-col">
+                  <label className="block text-lightBlue mb-2">Company</label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("experience.company")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.experience?.company?.message}
+                  </p>
+                  <label className="block text-lightBlue mb-2">
+                    Position
+                  </label>
+                  <input
+                    className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("experience.position")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.experience?.position?.message}
+                  </p>
+                  <div className="flex items-center justify-between w-full flex-wrap">
+                    <div className="flex lg:flex-row items-center">
+                      <label
+                        htmlFor="startDate"
+                        className="text-lightBlue mr-4 whitespace-nowrap mb-2"
+                      >
+                        Started On
                       </label>
                       <input
                         type="date"
-                        className="w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                        {...register("experience.endDate", {
+                        id="startDate"
+                        className="bg-transparent p-4 rounded-[5px] focus:border-1"
+                        {...register("experience.startDate", {
                           valueAsDate: true,
                         })}
                       />
                       <p className="text-warning mt-2">
-                        {errors.experience?.endDate?.message}
+                        {errors.experience?.startDate?.message}
                       </p>
                     </div>
-                  )}
-                </div>
-                <div className="flex flex-nowrap items-center mt-8">
-                  <input
-                    type="checkbox"
-                    {...register("experience.stillWorking")}
-                  />
-                  <label className="block text-lightBlue ml-4">
-                    I am still working here
-                  </label>
-                </div>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Describe Your Role
-                </label>
-                <textarea
-                  className="p-2 appearance-none w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("experience.jobDescription")}
-                />
-                <p className="text-warning mt-2">
-                  {errors.experience?.jobDescription?.message}
-                </p>
-                <button
-                  type="submit"
-                  className="py-3 px-8 mt-8 ml-auto transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px]"
-                >
-                  Next
-                </button>
-              </div>
-            )}
-            {tabValue === "4" && (
-              <div className="flex items-start flex-col">
-                <p className="text-grey ml-auto md:text-right sm:text-right">
-                  Write about your skills
-                </p>
-                <label htmlFor="skills" className="block text-lightBlue mb-2">
-                  Your Skills
-                </label>
-                <div className="grid lg:grid-cols-[repeat(4,_auto)] sm:grid-cols-[repeat(3,_auto)] gap-3 w-full justify-stretch  ">
-                  {/* {updatedSkills.length ? updatedSkills.map((skill, id) => (
-                    <div
-                    key={id}
-                    className="flex flex-nowrap px-4 py-2 border-lightBlue border"
-                  >
-                    <label key={id}>
-                      <p className="text-lightBlue text-sm">
-                        {skill}
-                      </p>
-                    </label>
-                    <button
-                      type="button"
-                      className="ml-auto"
-                      onClick={() => {
-                        let skillArr = updatedSkills;
-                        skillArr.splice(id, 1);
-                        setUpdatedSkills(skillArr)
-                      }}
-                    >
-                      X
-                    </button>
+                    {!watch("experience").stillWorking && (
+                      <div className="animate-fadeIn flex lg:flex-row items-center ">
+                        <label className="text-lightBlue mr-4 whitespace-nowrap mb-2">
+                          Last Date
+                        </label>
+                        <input
+                          type="date"
+                          className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                          {...register("experience.endDate", {
+                            valueAsDate: true,
+                          })}
+                        />
+                        <p className="text-warning mt-2">
+                          {errors.experience?.endDate?.message}
+                        </p>
+                      </div>
+                    )}
                   </div>
-                  )): null} */}
-                  {fields.map(
-                    (skill, index) =>
-                      skill.skill !== "" && (
-                        <div
-                          className="flex flex-nowrap px-4 py-2 border-lightBlue border"
-                          key={skill.id}
-                        >
-                          <label key={skill.id}>
-                            <p className="text-lightBlue text-sm">
-                              {skill.skill}
-                            </p>
-                          </label>
-                          <button
-                            type="button"
-                            className="ml-auto"
-                            onClick={() => remove(index)}
-                          >
-                            X
-                          </button>
-                        </div>
-                      )
-                  )}
+                  <div className="flex flex-nowrap items-center mt-8">
+                    <input
+                      type="checkbox"
+                      {...register("experience.stillWorking")}
+                    />
+                    <label className="block text-lightBlue ml-4">
+                      I am still working here
+                    </label>
+                  </div>
+                  <label className="block text-lightBlue mb-2 mt-8">
+                    Describe Your Role
+                  </label>
+                  <textarea
+                    className="p-4 appearance-none w-full rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("experience.jobDescription")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.experience?.jobDescription?.message}
+                  </p>
+                  <button
+                    type="submit"
+                    className={"py-3 px-8 mt-8 transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px] " + (width < 991 ? "mx-auto mb-4 w-[90%]" : "ml-auto")}
+                  >
+                    Next
+                  </button>
                 </div>
-                <input
-                  className="bg-transparent mt-4 p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1"
-                  {...register(`application.skills.${currentIdx}.skill`)}
-                  onKeyDown={async (e) => {
-                    if (e.key === "Enter") {
+              )}
+              {tabValue === "4" && (
+                <div className="flex items-start flex-col">
+                  <label htmlFor="skills" className="block text-lightBlue mb-2">
+                    Your Skills
+                  </label>
+                  <div className="grid lg:grid-cols-[repeat(4,_auto)] sm:grid-cols-[repeat(3,_auto)] gap-3 w-full justify-stretch  ">
+                    {fields.map(
+                      (skill, index) =>
+                        skill.skill !== "" && (
+                          <div
+                            className="flex flex-nowrap px-4 py-2 border-lightBlue border"
+                            key={skill.id}
+                          >
+                            <label key={skill.id}>
+                              <p className="text-lightBlue text-sm">
+                                {skill.skill}
+                              </p>
+                            </label>
+                            <button
+                              type="button"
+                              className="ml-auto"
+                              onClick={() => remove(index)}
+                            >
+                              X
+                            </button>
+                          </div>
+                        )
+                    )}
+                  </div>
+                  <input
+                    className="mt-4 p-4 rounded-[5px] focus:border-1 bg-btnVeryLight w-full"
+                    {...register(`application.skills.${currentIdx}.skill`)}
+                    onKeyDown={async (e) => {
+                      if (e.key === "Enter") {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (
+                          getValues().application?.skills &&
+                          getValues().application?.skills[currentIdx]?.skill !==
+                            ""
+                        ) {
+                          append({ skill: "" });
+                          setCurrentIdx((prev) => prev + 1);
+                        }
+                      }
+                    }}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors?.application?.skills
+                      ? errors?.application?.skills?.skills?.message
+                      : null}
+                  </p>
+                  <button
+                    type="button"
+                    className="text-lightBlue"
+                    onClick={async (e) => {
                       e.stopPropagation();
                       e.preventDefault();
                       if (
@@ -662,51 +712,31 @@ export default function ProfileForm({ defaultValues }) {
                         append({ skill: "" });
                         setCurrentIdx((prev) => prev + 1);
                       }
-                    }
-                  }}
-                />
-                <p className="text-warning mt-2">
-                  {errors?.application?.skills
-                    ? errors?.application?.skills?.skills?.message
-                    : null}
-                </p>
-                <button
-                  type="button"
-                  className="text-lightBlue"
-                  onClick={async (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    if (
-                      getValues().application?.skills &&
-                      getValues().application?.skills[currentIdx]?.skill !== ""
-                    ) {
-                      append({ skill: "" });
-                      setCurrentIdx((prev) => prev + 1);
-                    }
-                  }}
-                >
-                  + Add skill
-                </button>
-                <label className="block text-lightBlue mb-2 mt-8">
-                  Cover Letter For Your Applied Role
-                </label>
-                <textarea
-                  className="min-h-[10rem] p-2 appearance-none w-full p-2 rounded-[5px] border-veryLightBlue border-2 focus:border-lightBlue focus:border-1 outline-none"
-                  {...register("application.coverLetter")}
-                />
-                <p className="text-warning mt-2">
-                  {errors.application?.coverLetter?.message}
-                </p>
+                    }}
+                  >
+                    + Add skill
+                  </button>
+                  <label className="block text-lightBlue mb-2 mt-8">
+                    Cover Letter For Your Applied Role
+                  </label>
+                  <textarea
+                    className="min-h-[10rem] p-4 appearance-none w-full rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                    {...register("application.coverLetter")}
+                  />
+                  <p className="text-warning mt-2">
+                    {errors.application?.coverLetter?.message}
+                  </p>
 
-                <button
-                  type="submit"
-                  className="py-3 px-8 mt-8 ml-auto transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px]"
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </form>
+                  <button
+                    type="submit"
+                    className={"py-3 px-8 mt-8 transition ease-in-out delay-150 bg-lightBlue hover:-translate-y-1 hover:scale-110 hover:bg-darkBlue duration-300 text-white rounded-[5px] " + (width < 991 ? "mx-auto mb-4 w-[90%]" : "ml-auto")}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
       </div>
       <ToastContainer

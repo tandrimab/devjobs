@@ -55,15 +55,15 @@ module.exports = {
         },
         slide: {
           "0%": {
-           top: "10px",
-           opacity: "0",
+            top: "10px",
+            opacity: "0",
           },
-         "50%": {
-           top: "0px",
-           opacity: "1",
-         },          
+          "50%": {
+            top: "0px",
+            opacity: "1",
+          },
           "100%": {
-           top: "-10px",
+            top: "-10px",
             opacity: "0",
           },
         },
@@ -71,12 +71,12 @@ module.exports = {
           "0%": {
             opacity: "0",
             transform: "translate(100%, 0%)",
-            color: 'white'
+            color: "white",
           },
           "100%": {
             opacity: "1",
             transform: "translate(0%, 0%)",
-            color: 'white'
+            color: "white",
           },
         },
         zoom: {
@@ -93,8 +93,8 @@ module.exports = {
             transform: "scale(1,1)",
           },
           "100%": {
-            transform: 'scale(0,0)'
-          }
+            transform: "scale(0,0)",
+          },
         },
         underline: {
           "0%": {
@@ -152,22 +152,22 @@ module.exports = {
 
           "50%": {
             opacity: "1",
-          transform: "translate(0%,0%) scale(1,1)",
+            transform: "translate(0%,0%) scale(1,1)",
           },
           "71%": {
             transform: "translate(0%, -20%)",
           },
           "100%": {
             transform: "translate(0%, 0%)",
-          }
+          },
         },
         btnZoom: {
           "0%": {
-            transform: "scale(1, 1)"
+            transform: "scale(1, 1)",
           },
           "100%": {
-            transform: "scale(1.2, 1.2)"
-          }
+            transform: "scale(1.2, 1.2)",
+          },
         },
       },
       animation: {
@@ -182,11 +182,15 @@ module.exports = {
         zoomInOutText: "zoom 3s ease-in-out",
         scaleImage: "scaleImage 1s ease-in-out 1 forwards",
         scaleRight: "scaleToRight 1s ease-in-out 1 forwards",
-        btnZoom: "btnZoom .5s ease-in"
+        btnZoom: "btnZoom .5s ease-in",
       },
       boxShadow: {
-        'blue-border': '0 0 15px #5964E0'
-      }
+        "blue-border": "0 0 15px #5964E0",
+        "black-white":
+          "-15px -15px 15px rgba(255, 255, 255, 0.75), 15px 15px 15px rgba(0, 0, 0, 0.1)",
+        "black-white-inset":
+          "-15px -15px 15px rgba(255, 255, 255, 0.75), 15px 15px 15px rgba(0, 0, 0, 0.1), inset -5px -5px 5px rgba(255, 255, 255, 0.75), inset 5px 5px 5px rgba(0, 0, 0, 0.1)",
+      },
     },
     fontFamily: {
       bold: ["Kumbh sans_bold"],
