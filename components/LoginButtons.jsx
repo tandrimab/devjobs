@@ -5,7 +5,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { usePathStore } from "@/app/store/store";
-import AnimatedLogo from "./AnimatedLogo";
 import Image from "next/image";
 
 export default function LoginButtons() {
