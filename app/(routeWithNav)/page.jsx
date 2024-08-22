@@ -16,7 +16,7 @@ export default function Home() {
     useEffect(() => {
         async function fetchAPI() {
             if (!jobs.length) {
-              const res = await fetch('http://localhost:3000/api/jobs', {next:{revalidate: 3600}} );
+              const res = await fetch(process.env.NEXTAUTH_URL + '/api/jobs', {next:{revalidate: 3600}} );
               const data = await res.json();
               setJobs([...data]);
               setFilteredJobs(data);
