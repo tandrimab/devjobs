@@ -233,8 +233,8 @@ export default function ProfileForm({ defaultValues }) {
 
   return (
     <div className=" min-h-screen flex justify-center mt-4 ">
-      <div className={"m-4 shadow-black-white rounded-[12px] bg-lightGrey mx-auto flex justify-between max-w-[1100px] w-[80%] min-h-[700px] " + (width < 991 ? "flex-col" : "flex-row max-h-[800px]")}>
-        <div className={"bg-btnLightHover  max-w-[700px] " + (width < 991 ? "w-[100%] min-h-[450px] rounded-[12px] " : "w-[35%] rounded-[50px] rounded-l-[12px]")}>
+      <div className={"m-4 shadow-black-white rounded-[12px] bg-lightGrey mx-auto flex justify-between max-w-[1100px] min-h-[700px] " + (width < 991 ? "flex-col w-[90%]" : "flex-row max-h-[800px] w-[80%]")}>
+        <div className={"bg-btnLightHover " + (width < 991 ? "w-[100%] min-h-[450px] rounded-[12px] " : "w-[35%] rounded-[50px] rounded-l-[12px]")}>
           {tabValue === "1" && (
             <div className="flex flex-col my-auto justify-center items-center h-full p-4">
               <p className="text-3xl mb-12 text-veryDarkBlue">Personal Details</p>
@@ -279,7 +279,7 @@ export default function ProfileForm({ defaultValues }) {
                 />
               </div>
               <p className="text-sm mt-4 text-center">
-                  Tell us about your work experience
+                  Tell us about your latest work experience
                 </p>
             </div>
           )}
@@ -300,7 +300,7 @@ export default function ProfileForm({ defaultValues }) {
             </div>
           )}
         </div>
-        <div className={"max-w-[600px] flex-grow m-auto " + (width < 991 && "w-[90%]")}>
+        <div className={"max-w-[650px] flex-grow m-auto " + (width < 991 && "w-[90%]")}>
           <div className={"flex m-auto shadow-black-white justify-between py-2 px-4 " + (width < 991 ? "w-[90%] mt-6" : "w-[70%]")}>
               <span
                 onClick={() => setValue("selectedTab", "1")}
@@ -364,7 +364,7 @@ export default function ProfileForm({ defaultValues }) {
                 />
               </span>
           </div>
-          <div>
+          <div className="min-h-[600px]">
             <form
               className="w-full mt-8 px-4"
               onSubmit={handleSubmit(submitProfile, (e) =>
@@ -512,13 +512,13 @@ export default function ProfileForm({ defaultValues }) {
                   <p className="text-warning mt-2">
                     {errors.education?.graduationDate?.message}
                   </p>
-                  <div className="flex lg:flex-row items-center mt-8 flex-wrap w-full">
-                    <label htmlFor="degree" className="text-lightBlue mr-4">
+                  <div className="flex lg:flex-row items-center mt-2 flex-wrap w-full">
+                    <label htmlFor="degree" className="text-lightBlue mr-4 mb-2">
                       Degree
                     </label>
                     <select
                       id="degree"
-                      className="flex-grow p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
+                      className="flex-grow p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight w-full"
                       {...register("education.degree")}
                     >
                       {degrees.map((degree) => (
@@ -582,7 +582,7 @@ export default function ProfileForm({ defaultValues }) {
                     {errors.experience?.position?.message}
                   </p>
                   <div className="flex items-center justify-between w-full flex-wrap">
-                    <div className="flex lg:flex-row items-center">
+                  <div className={"animate-fadeIn flex " + (width < 991 ? "mt-2 flex-col items-start w-full" : "items-center flex-row mt-4")}>
                       <label
                         htmlFor="startDate"
                         className="text-lightBlue mr-4 whitespace-nowrap mb-2"
@@ -592,9 +592,9 @@ export default function ProfileForm({ defaultValues }) {
                       <input
                         type="date"
                         id="startDate"
-                        className="bg-transparent p-4 rounded-[5px] focus:border-1"
+                        onClick={(e) => e.currentTarget.showPicker()}
+                        className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
                         {...register("experience.startDate", {
-                          valueAsDate: true,
                         })}
                       />
                       <p className="text-warning mt-2">
@@ -602,7 +602,7 @@ export default function ProfileForm({ defaultValues }) {
                       </p>
                     </div>
                     {!watch("experience").stillWorking && (
-                      <div className="animate-fadeIn flex lg:flex-row items-center ">
+                      <div className={"animate-fadeIn flex " + (width < 991 ? "mt-2 flex-col items-start w-full" : "items-center flex-row")}>
                         <label className="text-lightBlue mr-4 whitespace-nowrap mb-2">
                           Last Date
                         </label>
@@ -610,8 +610,8 @@ export default function ProfileForm({ defaultValues }) {
                           type="date"
                           className="w-full p-4 rounded-[5px] focus:border-1 focus:border-veryLightBlue outline-none bg-btnVeryLight"
                           {...register("experience.endDate", {
-                            valueAsDate: true,
                           })}
+                          onClick={(e) => e.currentTarget.showPicker()}
                         />
                         <p className="text-warning mt-2">
                           {errors.experience?.endDate?.message}
@@ -619,12 +619,13 @@ export default function ProfileForm({ defaultValues }) {
                       </div>
                     )}
                   </div>
-                  <div className="flex flex-nowrap items-center mt-8">
+                  <div className="flex flex-nowrap items-center mt-4">
                     <input
                       type="checkbox"
+                      id="stillWorking"
                       {...register("experience.stillWorking")}
                     />
-                    <label className="block text-lightBlue ml-4">
+                    <label className="block text-lightBlue ml-4 cursor-pointer" htmlFor="stillWorking">
                       I am still working here
                     </label>
                   </div>
