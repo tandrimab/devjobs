@@ -14,10 +14,6 @@ export default async function ProfileViewForm({ defaultValues }) {
 
   const experienceRef = useRef();
 
-  useEffect(() => {
-    console.log(experienceRef.current.offsetTop);
-  })
-
   return (
     <div className=" min-h-screen lg:max-w-[50%] md:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-3rem] sm:mt-[-2rem] relative bg-white">
       <div className="flex flex-col justify-between">
