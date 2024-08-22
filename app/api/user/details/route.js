@@ -48,7 +48,14 @@ export async function POST(request) {
         success: true,
         message: `${updateResult.modifiedCount} document(s) have been updated successfully`,
       };
-    } else {
+    } else if(updateResult?.acknowledged) {
+      res = {
+        success: true,
+        message: 'Document(s) are up-to-date',
+      };
+    }else {
+      console.log('res', updateResult);
+      
       throw new ApiError(
         500,
         "Unable to update user details. Please try again later."
@@ -81,8 +88,6 @@ export async function GET() {
       token: sessionCookie.value,
       secret: process.env.NEXTAUTH_SECRET,
     });
-
-    console.log("data", token);
 
     if (!token || !token.access_token) {
       if (!token) {
