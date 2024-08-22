@@ -3,25 +3,35 @@ import { mdiMenu } from "@mdi/js";
 import Icon from "@mdi/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ProfileMob({ session, login, signout }) {
+    const [open, setOpen] = useState(false);
+
+    console.log(open);
+    
+
     return (
         <div className="group relative flex items-center ml-6 ">
             <Icon
                 path={mdiMenu}
                 size="2rem"
                 className="text-white cursor-pointer"
+                onClick={() => setOpen(!open)}
             />
 
-            <div className="absolute top-[50px] right-[5px] hidden group-hover:block bg-btnDarkHover rounded-[12px] z-[999] text-white min-w-[300px]">
+            <div className={"absolute top-[50px] right-[5px] group-hover:block bg-btnDarkHover rounded-[12px] z-[999] text-white min-w-[300px] " + (open ? "block" : "hidden")}>
                 {session ? <div className="px-6 py-4 flex items-center border-b-veryLightBlue border-b ">
                     <img src={session?.image} className="rounded-full max-w-[30px] max-h-[30px] mr-4" referrerPolicy="no-referrer" />
                     <div>
                         <p className="font-bold">{session?.name}</p>
                         <p className="font-medium">{session?.email}</p>
                     </div>
-                    <Link href="/appliedCompanies" className="px-6 py-4 font-medium w-full text-left">Applied Companies</Link>
                 </div> : null}
+                <div className="px-6 py-4 ">
+                    <Link href="/appliedCompanies" className="font-medium w-full text-left">Applied Companies</Link>
+
+                </div>
                 <div className="flex item-center ml-auto my-auto px-6 py-4 justify-between">
                     <p>Theme</p>
                     <div className="flex shrink-0">

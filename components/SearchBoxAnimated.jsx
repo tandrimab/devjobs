@@ -16,12 +16,12 @@ export default function SearchBoxAnimated(props) {
   }, [index]);
 
   return (
-    <div className="flex items-center justify-start p-4 rounded-tl-[6px] rounded-bl-[6px] relative">
+    <div className="flex items-center justify-start md:p-4 sm:p-0 rounded-tl-[6px] rounded-bl-[6px] relative">
       <Image
         src="https://devjobs-fs.s3.ap-south-1.amazonaws.com/assets/desktop/icon-search.svg"
         width={24}
         height={24}
-        className="my-2 mx-4"
+        className="my-2 md:mx-4 sm:mx-2"
         alt="search"
       />
       <input
@@ -29,17 +29,17 @@ export default function SearchBoxAnimated(props) {
         type="text"
         value={props.filters.position}
         onChange={props.handleSearchInput}
-        className="outline-none w-full bg-transparent peer z-[999]"
+        className="outline-none w-full bg-transparent peer z-[999] dark:text-darkGrey dark:focus:text-white"
       />
 
-      <div className="peer-focus:hidden flex justify-start absolute w-full left-20">
+      <div className="peer-focus:hidden flex justify-start absolute md:left-20 sm:left-10">
         <div className="relative">
-          <label>Filter by &nbsp;</label>
+          <label className="dark:text-darkGrey">Filter by &nbsp;</label>
           {searchList.map((item, idx) => (
             <label
               key={idx.toString()}
               className={
-                "absolute " +
+                "absolute dark:text-darkGrey " +
                 (idx === index
                   ? " left-[4.2rem] top-[-5px] block animate-sliderUp transition ease-in-out delay-100 "
                   : "hidden")

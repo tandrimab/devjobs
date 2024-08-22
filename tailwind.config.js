@@ -6,6 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -40,6 +41,7 @@ module.exports = {
         btnLightHover: "rgba(89, 100, 224, 0.35)",
         btnVeryLight: "rgba(89, 100, 224, 0.1)",
         warning: "rgba(255, 0, 0, 1)",
+        midnightLight: "#979797",
       },
       backgroundSize: {
         "1/2": "50%",

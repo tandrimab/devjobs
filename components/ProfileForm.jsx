@@ -232,12 +232,12 @@ export default function ProfileForm({ defaultValues }) {
   };
 
   return (
-    <div className=" min-h-screen flex justify-center mt-4 ">
-      <div className={"m-4 shadow-black-white rounded-[12px] bg-lightGrey mx-auto flex justify-between max-w-[1100px] min-h-[700px] " + (width < 991 ? "flex-col w-[90%]" : "flex-row max-h-[800px] w-[80%]")}>
+    <div className=" min-h-screen flex justify-center mt-4 dark:bg-midnight">
+      <div className={"m-4 shadow-black-white dark:shadow-blue-border rounded-[12px] bg-lightGrey dark:bg-veryDarkBlue mx-auto flex justify-between max-w-[1100px] min-h-[700px] " + (width < 991 ? "flex-col w-[90%]" : "flex-row max-h-[800px] w-[80%]")}>
         <div className={"bg-btnLightHover " + (width < 991 ? "w-[100%] min-h-[450px] rounded-[12px] " : "w-[35%] rounded-[50px] rounded-l-[12px]")}>
           {tabValue === "1" && (
             <div className="flex flex-col my-auto justify-center items-center h-full p-4">
-              <p className="text-3xl mb-12 text-veryDarkBlue">Personal Details</p>
+              <p className="text-3xl mb-12 text-veryDarkBlue dark:text-violet">Personal Details</p>
               <div className="relative">
                 <Image
                   src="/assets/desktop/details.svg"
@@ -246,14 +246,14 @@ export default function ProfileForm({ defaultValues }) {
                   alt="personal-details"
                 />
               </div>
-              <p className="text-sm mt-4 text-center">
+              <p className="text-sm mt-4 text-center dark:text-violet">
                   Tell us about yourself so the startups know who you are
                 </p>
             </div>
           )}
           {tabValue === "2" && (
             <div className="flex flex-col my-auto justify-center items-center h-full p-4">
-              <p className="text-3xl mb-12 text-veryDarkBlue">Education</p>
+              <p className="text-3xl mb-12 text-veryDarkBlue dark:text-violet">Education</p>
               <div className="relative">
                 <Image
                   src="/assets/desktop/education.svg"
@@ -262,14 +262,14 @@ export default function ProfileForm({ defaultValues }) {
                   alt="education"
                 />
               </div>
-              <p className="text-sm mt-4 text-center">
+              <p className="text-sm mt-4 text-center dark:text-violet">
                   Tell us about your education
                 </p>
             </div>
           )}
           {tabValue === "3" && (
             <div className="flex flex-col my-auto justify-center items-center h-full p-4">
-              <p className="text-3xl mb-12 text-veryDarkBlue">Work Experience</p>
+              <p className="text-3xl mb-12 text-veryDarkBlue dark:text-violet">Work Experience</p>
               <div className="relative">
                 <Image
                   src="/assets/desktop/work.svg"
@@ -278,14 +278,14 @@ export default function ProfileForm({ defaultValues }) {
                   alt="work-experience"
                 />
               </div>
-              <p className="text-sm mt-4 text-center">
+              <p className="text-sm mt-4 text-center dark:text-violet">
                   Tell us about your latest work experience
                 </p>
             </div>
           )}
           {tabValue === "4" && (
             <div className="flex flex-col my-auto justify-center items-center h-full p-4">
-              <p className="text-3xl mb-12 text-veryDarkBlue">Application</p>
+              <p className="text-3xl mb-12 text-veryDarkBlue dark:text-violet">Application</p>
               <div className="relative">
                 <Image
                   src="/assets/desktop/application.svg"
@@ -294,20 +294,20 @@ export default function ProfileForm({ defaultValues }) {
                   alt="application"
                 />
               </div>
-              <p className="text-sm mt-4 text-center">
+              <p className="text-sm mt-4 text-center dark:text-violet">
                   Write about your skills
                 </p>
             </div>
           )}
         </div>
         <div className={"max-w-[650px] flex-grow m-auto " + (width < 991 && "w-[90%]")}>
-          <div className={"flex m-auto shadow-black-white justify-between py-2 px-4 " + (width < 991 ? "w-[90%] mt-6" : "w-[70%]")}>
+          <div className={"flex m-auto shadow-black-white dark:shadow-blue-border justify-between py-2 px-4 " + (width < 991 ? "w-[90%] mt-6" : "w-[70%]")}>
               <span
                 onClick={() => setValue("selectedTab", "1")}
                 className={
                   "cursor-pointer m-auto flex justify-center items-center " +
                   (tabValue === "1"
-                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto "
+                    ? "font-bold shadow-black-white-inset dark:shadow-none min-w-[70px] mx-auto dark:border-[1px] dark:border-violet dark:rounded-full dark:p-4 "
                     : "font-medium")
                 }
               >
@@ -323,7 +323,7 @@ export default function ProfileForm({ defaultValues }) {
                 className={
                   "cursor-pointer m-auto flex justify-center items-center " +
                   (tabValue === "2"
-                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    ? "font-bold shadow-black-white-inset dark:shadow-none min-w-[70px] mx-auto dark:border-[1px] dark:border-violet dark:rounded-full dark:p-4"
                     : "font-medium")
                 }
               >
@@ -338,7 +338,7 @@ export default function ProfileForm({ defaultValues }) {
                 className={
                   "cursor-pointer m-auto flex justify-center items-center " +
                   (tabValue === "3"
-                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    ? "font-bold shadow-black-white-inset dark:shadow-none min-w-[70px] mx-auto dark:border-[1px] dark:border-violet dark:rounded-full dark:p-4"
                     : "font-medium")
                 }
               >
@@ -353,7 +353,7 @@ export default function ProfileForm({ defaultValues }) {
                 className={
                   "cursor-pointer m-auto flex justify-center items-center " +
                   (tabValue === "4"
-                    ? "font-bold shadow-black-white-inset min-w-[70px] mx-auto"
+                    ? "font-bold shadow-black-white-inset dark:shadow-none min-w-[70px] mx-auto dark:border-[1px] dark:border-violet dark:rounded-full dark:p-4"
                     : "font-medium")
                 }
               >

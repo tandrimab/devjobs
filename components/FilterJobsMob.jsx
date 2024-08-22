@@ -11,23 +11,23 @@ export default function FilterJobsMob(props) {
 
   return (
     <>
-      <div className="grid grid-cols-13 place-content-center w-full bg-white max-w-full rounded-[6px] p-2">
+      <div className="grid grid-cols-13 place-content-center w-full bg-white dark:bg-veryDarkBlue max-w-full rounded-[6px] p-2">
         <SearchBoxAnimated {...props} />
         <button
           onClick={() => setShowHiddenFilter(true)}
           className="sm:mr-3 md:mr-0"
         >
-          <Icon path={mdiFilter} size="2rem" className="text-darkGrey" />
+          <Icon path={mdiFilter} size={1} className="text-darkGrey" />
         </button>
-        <button className="bg-lightBlue rounded-[6px] min-w-[3rem]">
-          <Icon path={mdiMagnify} size="2rem" className="text-white mx-auto" />
+        <button className="bg-lightBlue rounded-[6px] min-w-[2rem]">
+          <Icon path={mdiMagnify} size={1} className="text-white mx-auto" />
         </button>
       </div>
       {showHiddenFilter && (
         <Modal
           onClose={() => setShowHiddenFilter(false)}
           modalClassName="backdrop-contrast-50 backdrop-blur-sm"
-          bodyClassName="divide-y-[1px] divide-veryLightGrey md:w-1/2 sm:w-8/12"
+          bodyClassName="divide-y-[1px] divide-veryLightGrey md:w-1/2 sm:w-8/12 dark:bg-midnight"
         >
           <div className="flex items-center justify-start p-4">
             <Image
@@ -43,7 +43,7 @@ export default function FilterJobsMob(props) {
               placeholder="Filter by location…"
               value={props.filters.location}
               onChange={props.handleSearchInput}
-              className="outline-none w-full bg-transparent"
+              className="outline-none w-full bg-transparent dark:text-darkGrey dark:focus:text-white"
             />
           </div>
           <label className="flex items-center justify-start p-4 rounded-tr-[6px] rounded-br-[6px]">
@@ -52,7 +52,7 @@ export default function FilterJobsMob(props) {
               type="checkbox"
               checked={props.filters.isFulltime}
               onChange={props.handleSearchInput}
-              className="peer appearance-none rounded-[3px] ring-0 bg-veryLightBlue w-[24px] h-[24px] checked:bg-lightBlue my-2 mx-4 relative shrink-0"
+              className="peer appearance-none rounded-[3px] ring-0 bg-veryLightBlue w-[24px] h-[24px] checked:bg-lightBlue my-2 mx-4 relative shrink-0 dark:bg-darkGrey dark:focus:text-white"
             />
             <label className="font-bold">Full Time Only</label>
             <Image
