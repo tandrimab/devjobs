@@ -169,6 +169,17 @@ module.exports = {
             transform: "scale(1.2, 1.2)",
           },
         },
+        shake: {
+          "10%, 90%": {
+            transform: "translate3d(-1px, 0, 0)",
+          },
+          "20%, 80%": {
+            transform: "translate3d(3px, 0, 0)",
+          },
+          "30%, 50%, 70%": {
+            transform: "translate3d(-4px, 0, 0)"
+          },
+        }
       },
       animation: {
         btnAnimated: "rotate 1s linear",
@@ -183,6 +194,7 @@ module.exports = {
         scaleImage: "scaleImage 1s ease-in-out 1 forwards",
         scaleRight: "scaleToRight 1s ease-in-out 1 forwards",
         btnZoom: "btnZoom .5s ease-in",
+        shake: "shake 2s linear infinite"
       },
       boxShadow: {
         "blue-border": "0 0 15px #5964E0",
