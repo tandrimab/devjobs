@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function FilterJobsWeb(props) {
   return (
-    <div className=" grid grid-cols-3 place-content-center w-full divide-x-[1px] divide-veryLightGrey bg-white max-w-full rounded-[6px]">
+    <div className=" grid grid-cols-3 place-content-center w-full divide-x-[1px] divide-veryLightGrey bg-white dark:bg-veryDarkBlue max-w-full rounded-[6px]">
       <SearchBoxAnimated {...props} />
       <div className="flex items-center justify-start p-4">
         <Image
@@ -19,7 +19,7 @@ export default function FilterJobsWeb(props) {
           placeholder="Filter by location…"
           value={props.filters.location}
           onChange={props.handleSearchInput}
-          className="outline-none w-full bg-transparent"
+          className="outline-none w-full bg-transparent dark:text-darkGrey dark:focus:text-white"
         />
       </div>
       <label className="flex items-center justify-start p-4 rounded-tr-[6px] rounded-br-[6px]">
@@ -28,9 +28,9 @@ export default function FilterJobsWeb(props) {
           type="checkbox"
           checked={props.filters.isFulltime}
           onChange={props.handleSearchInput}
-          className="peer appearance-none rounded-[3px] ring-0 bg-veryLightBlue w-[24px] h-[24px] checked:bg-lightBlue my-2 mx-4 relative shrink-0"
+          className="peer appearance-none rounded-[3px] ring-0 bg-veryLightBlue w-[24px] h-[24px] checked:bg-lightBlue my-2 mx-4 relative shrink-0 dark:bg-midnightLight"
         />
-        <label className="font-bold">Full Time</label>
+        <label className="font-bold dark:text-white">Full Time</label>
         <Image
           src="/assets/desktop/icon-check.svg"
           className="absolute peer-checked:block ml-[1.2rem] hidden"

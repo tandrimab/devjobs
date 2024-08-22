@@ -1,13 +1,15 @@
 import GoBackClientComponent from "@/components/GoBackClientComponent";
+import Image from "next/image";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[calc(100vh-10rem)] flex items-center justify-center flex-col lg:max-w-[50%] sm:max-w-auto sm:px-8 mx-auto relative overflow-auto">
-      <div>
-        <span className="text-[10rem] font-bold text-darkGrey">4</span>
-        <span className="text-[10rem] text-veryLightGrey font-bold">0</span>
-        <span className="text-[10rem] font-bold text-darkGrey">4</span>
-      </div>
+    <div className="min-h-screen flex items-center justify-center flex-col lg:max-w-[50%] sm:max-w-auto sm:px-8 mx-auto relative overflow-auto">
+      <Image
+      className="mb-8"
+        src="/assets/desktop/404.svg"
+        width={400}
+        height={400}
+      />
       <p className="text-3xl text-darkBlue font-medium mb-4 text-center">
         There is nothing here...
       </p>

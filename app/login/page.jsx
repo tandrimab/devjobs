@@ -3,11 +3,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { usePathStore } from "../store/store";
-// import WelcomePage from "@/components/WelcomePage";
 import DotsLoader from "@/components/DotsLoader";
 import LoginButtons from "@/components/LoginButtons";
-import AdminForm from "@/components/AdminForm";
-import AnimatedLogo from "@/components/AnimatedLogo";
 import useWindowSize from "@/utilities/hooks/useWindowSize";
 import Icon from "@mdi/react";
 import { mdiLaptop } from "@mdi/js";
@@ -29,7 +26,9 @@ export default function LoginPage({}) {
     }
   }, [session, router]);
 
-  return (
+  return session?.user ? (
+    <DotsLoader />
+  ) : (
     <div className="h-screen w-full bg-midnight flex items-center justify-center login-container">
       <Icon
         path={mdiLaptop}
@@ -61,30 +60,30 @@ export default function LoginPage({}) {
         color="grey"
         className="icon absolute z-1 bottom-[5%] right-[5%]"
       />
-        <Icon
-          path={mdiBook}
-          size={1}
-          color="grey"
-          className="icon absolute z-1 top-[40%] left-[45%]"
-        />
+      <Icon
+        path={mdiBook}
+        size={1}
+        color="grey"
+        className="icon absolute z-1 top-[40%] left-[45%]"
+      />
       <Icon
         path={mdiLaptop}
         size={1}
         color="grey"
-        className="icon absolute z-1 top-[15%] left-2"
+        className="icon absolute z-1 top-[15%] left-50"
       />
-        <Icon
-          path={mdiCloudSearch}
-          size={1}
-          color="grey"
-          className="icon absolute z-1 top-[29%] left-[80%]"
-        />
-        <Icon
-          path={mdiNetwork}
-          size={1}
-          color="grey"
-          className="icon absolute z-1 bottom-[2%] right-[92%]"
-        />
+      <Icon
+        path={mdiCloudSearch}
+        size={1}
+        color="grey"
+        className="icon absolute z-1 top-[29%] left-[80%]"
+      />
+      <Icon
+        path={mdiNetwork}
+        size={1}
+        color="grey"
+        className="icon absolute z-1 bottom-[2%] right-[92%]"
+      />
       <Icon
         path={mdiPen}
         size={1}

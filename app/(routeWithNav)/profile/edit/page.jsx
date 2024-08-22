@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { cookies } from "next/headers";
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);  
   
   if (!session?.user) {
 

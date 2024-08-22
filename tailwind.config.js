@@ -6,6 +6,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -40,6 +41,7 @@ module.exports = {
         btnLightHover: "rgba(89, 100, 224, 0.35)",
         btnVeryLight: "rgba(89, 100, 224, 0.1)",
         warning: "rgba(255, 0, 0, 1)",
+        midnightLight: "#979797",
       },
       backgroundSize: {
         "1/2": "50%",
@@ -55,15 +57,15 @@ module.exports = {
         },
         slide: {
           "0%": {
-           top: "10px",
-           opacity: "0",
+            top: "10px",
+            opacity: "0",
           },
-         "50%": {
-           top: "0px",
-           opacity: "1",
-         },          
+          "50%": {
+            top: "0px",
+            opacity: "1",
+          },
           "100%": {
-           top: "-10px",
+            top: "-10px",
             opacity: "0",
           },
         },
@@ -71,12 +73,12 @@ module.exports = {
           "0%": {
             opacity: "0",
             transform: "translate(100%, 0%)",
-            color: 'white'
+            color: "white",
           },
           "100%": {
             opacity: "1",
             transform: "translate(0%, 0%)",
-            color: 'white'
+            color: "white",
           },
         },
         zoom: {
@@ -93,8 +95,8 @@ module.exports = {
             transform: "scale(1,1)",
           },
           "100%": {
-            transform: 'scale(0,0)'
-          }
+            transform: "scale(0,0)",
+          },
         },
         underline: {
           "0%": {
@@ -152,23 +154,34 @@ module.exports = {
 
           "50%": {
             opacity: "1",
-          transform: "translate(0%,0%) scale(1,1)",
+            transform: "translate(0%,0%) scale(1,1)",
           },
           "71%": {
             transform: "translate(0%, -20%)",
           },
           "100%": {
             transform: "translate(0%, 0%)",
-          }
+          },
         },
         btnZoom: {
           "0%": {
-            transform: "scale(1, 1)"
+            transform: "scale(1, 1)",
           },
           "100%": {
-            transform: "scale(1.2, 1.2)"
-          }
+            transform: "scale(1.2, 1.2)",
+          },
         },
+        shake: {
+          "10%, 90%": {
+            transform: "translate3d(-1px, 0, 0)",
+          },
+          "20%, 80%": {
+            transform: "translate3d(3px, 0, 0)",
+          },
+          "30%, 50%, 70%": {
+            transform: "translate3d(-4px, 0, 0)"
+          },
+        }
       },
       animation: {
         btnAnimated: "rotate 1s linear",
@@ -182,11 +195,16 @@ module.exports = {
         zoomInOutText: "zoom 3s ease-in-out",
         scaleImage: "scaleImage 1s ease-in-out 1 forwards",
         scaleRight: "scaleToRight 1s ease-in-out 1 forwards",
-        btnZoom: "btnZoom .5s ease-in"
+        btnZoom: "btnZoom .5s ease-in",
+        shake: "shake 2s linear infinite"
       },
       boxShadow: {
-        'blue-border': '0 0 15px #5964E0'
-      }
+        "blue-border": "0 0 15px #5964E0",
+        "black-white":
+          "-15px -15px 15px rgba(255, 255, 255, 0.75), 15px 15px 15px rgba(0, 0, 0, 0.1)",
+        "black-white-inset":
+          "-15px -15px 15px rgba(255, 255, 255, 0.75), 15px 15px 15px rgba(0, 0, 0, 0.1), inset -5px -5px 5px rgba(255, 255, 255, 0.75), inset 5px 5px 5px rgba(0, 0, 0, 0.1)",
+      },
     },
     fontFamily: {
       bold: ["Kumbh sans_bold"],

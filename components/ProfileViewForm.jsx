@@ -14,16 +14,12 @@ export default async function ProfileViewForm({ defaultValues }) {
 
   const experienceRef = useRef();
 
-  useEffect(() => {
-    console.log(experienceRef.current.offsetTop);
-  })
-
   return (
-    <div className=" min-h-screen lg:max-w-[50%] md:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-3rem] sm:mt-[-2rem] relative bg-white">
+    <div className=" min-h-screen lg:max-w-[50%] md:max-w-[80%] max-w-full md:px-8 md:py-4 sm:px-8 sm:py-3 mx-auto lg:mt-[-3rem] md:mt-[-3rem] sm:mt-[-2rem] relative bg-white dark:bg-midnight">
       <div className="flex flex-col justify-between">
         <section className="flex flex-col relative border border-lightBlue px-8 pb-14 mt-10">
           <div className="block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet">
-            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue">
+            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue dark:bg-veryDarkBlue">
               Personal Details
             </span>
           </div>
@@ -58,8 +54,8 @@ export default async function ProfileViewForm({ defaultValues }) {
               {...register("personalDetails.location")}
             />
             <div className="flex lg:flex-row mt-8 justify-between flex-wrap w-full sm:items-start">
-              <div className="flex flex-col lg:mb-0 items-start sm:mb-8 grow mr-8">
-                <label htmlFor="role" className="text-lightBlue mr-4 block">
+              <div className="flex flex-col lg:mb-0 items-start sm:mb-8 grow md:mr-8 sm:mr-0">
+                <label htmlFor="role" className="text-lightBlue md:mr-4 block sm:mb-2">
                   Role
                 </label>
                 <input
@@ -71,7 +67,7 @@ export default async function ProfileViewForm({ defaultValues }) {
               <div className="flex flex-col items-start grow ">
                 <label
                   htmlFor="experience"
-                  className="block text-lightBlue mr-4"
+                  className="block text-lightBlue md:mr-4 sm:mb-2"
                 >
                   Years of Experience
                 </label>
@@ -98,7 +94,7 @@ export default async function ProfileViewForm({ defaultValues }) {
         </section>
         <section className="flex flex-col relative border border-lightBlue px-8 pb-14 mt-14">
           <div className="block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet">
-            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue">
+            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue dark:bg-veryDarkBlue">
               Education
             </span>
           </div>
@@ -158,7 +154,7 @@ export default async function ProfileViewForm({ defaultValues }) {
         </section>
         <section className="flex flex-col relative border border-lightBlue px-8 pb-14 mt-14" ref={experienceRef}>
           <div className="block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet">
-            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue">
+            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue dark:bg-veryDarkBlue">
               Work Experience
             </span>
           </div>
@@ -221,7 +217,7 @@ export default async function ProfileViewForm({ defaultValues }) {
         </section>
         <section className="flex flex-col relative border border-lightBlue px-8 pb-14 mt-14 mb-10">
           <div className="block pl-4 align-middle text-darkrey no-underline hover:text-lightViolet">
-            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue">
+            <span className="absolute top-[-15px] bg-white border border-lightBlue p-1 text-lightBlue dark:bg-veryDarkBlue">
               Application
             </span>
           </div>

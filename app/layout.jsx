@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import ToastContainerWrapper from "@/components/ToastContainerWrapper";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import Script from "next/script";
+import ThemeLayout from "@/components/ThemeLayout";
 
 
 export const metadata = {
@@ -20,8 +21,9 @@ export default async function Layout({ children, modal }) {
   return (
     <html lang="en">      
       <body>
+        <ThemeLayout>
         <SessionProvider session={session}>
-          <div className="bg-lightGrey">
+          <div className="bg-lightGrey dark:bg-midnight">
             {/* {!hiddenNav.includes(pathname) && <Navbar />} */}
             {/* <Navbar /> */}
             {children}
@@ -29,6 +31,7 @@ export default async function Layout({ children, modal }) {
           </div>
         <Script type="text/javascript" src={src} strategy="afterInteractive" />
         </SessionProvider>
+        </ThemeLayout>
         <ToastContainerWrapper />
       </body>
     </html>

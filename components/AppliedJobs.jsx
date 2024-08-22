@@ -8,7 +8,7 @@ export default function AppliedJobs({ data }) {
   const hourDiff = Math.floor(((Date.now() - new Date(data?.createdAt)) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
   return (
-    <div className="relative cursor-pointer w-full flex items-center shadow-[0_0_25px_#9DAEC2] bg-white hover:transition-all hover:delay-100 hover:duration-500 hover:scale-110 rounded-[12px] md:mt-4 sm:mt-8">
+    <div className="relative cursor-pointer w-full flex items-center shadow-[0_0_25px_#9DAEC2] bg-white hover:transition-all hover:delay-100 hover:duration-500 hover:scale-110 rounded-[12px] md:mt-4 sm:mt-8 dark:bg-veryDarkBlue dark:shadow-[0_0_25px_#121721]">
       <div
         className="md:w-[140px] md:h-[140px] sm:w-[3rem] sm:h-[3rem] sm:p-4 flex items-center relative sm:translate-y-[-40px] sm:translate-x-[-10px] md:translate-x-0 md:translate-y-0"
         style={{ backgroundColor: data?.companyDetails?.logoBackground }}

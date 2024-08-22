@@ -1,13 +1,24 @@
-"use client"
-import { useState } from "react"
+"use client";
+import { useEffect } from "react";
+import { useTheme } from "next-themes";
 
 export default function Switch() {
-    const [isDark, setIsDark] = useState(false);
+  const { theme, setTheme } = useTheme("light");
 
-    return (
-        <label className="switch-main shrink-0 cursor-pointer">
-            <input className="mode-switch" type="checkbox" onChange={() => setIsDark((prev) => !prev)} checked={!isDark} />
-            <span  className="slider"/>
-        </label>
-    )
+  useEffect(() => {
+    setTheme("light");
+  }, []);  
+
+  return (
+    <label className="switch-main shrink-0 cursor-pointer">
+      <input
+        className="mode-switch"
+        type="checkbox"
+        onChange={() =>
+          theme === "light" ? setTheme("dark") : setTheme("light")
+        }
+      />
+      <span className="slider" />
+    </label>
+  );
 }
