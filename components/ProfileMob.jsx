@@ -22,7 +22,7 @@ export default function ProfileMob({ session, login, signout }) {
 
             <div className={"absolute top-[50px] right-[5px] group-hover:block bg-btnDarkHover rounded-[12px] z-[999] text-white min-w-[300px] " + (open ? "block" : "hidden")}>
                 {session ? <div className="px-6 py-4 flex items-center border-b-veryLightBlue border-b ">
-                    <img src={session?.image} className="rounded-full max-w-[30px] max-h-[30px] mr-4" referrerPolicy="no-referrer" />
+                    <Image height={30} width={30} src={session?.image} className="rounded-full max-w-[30px] max-h-[30px] mr-4" referrerPolicy="no-referrer" alt="user-image" />
                     <div>
                         <p className="font-bold">{session?.name}</p>
                         <p className="font-medium">{session?.email}</p>

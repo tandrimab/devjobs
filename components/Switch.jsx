@@ -7,7 +7,7 @@ export default function Switch() {
 
   useEffect(() => {
     setTheme("light");
-  }, []);  
+  }, [setTheme]);  
 
   return (
     <label className="switch-main shrink-0 cursor-pointer">
