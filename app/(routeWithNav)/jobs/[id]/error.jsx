@@ -12,7 +12,7 @@ export default function Error({}) {
                 <span className="text-[15rem] font-bold text-darkGrey">4</span>
             </div>
             <p className="text-[5rem] text-darkBlue font-medium mb-4">There is nothing here...</p>
-            <p className="text-darkGrey text-xl">...maybe the job you're looking for is not listed yet or never existed</p>
+            <p className="text-darkGrey text-xl">...maybe the job you&apos;re looking for is not listed yet or never existed</p>
             <button className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-xl mx-auto mt-6 hover:bg-btnDarkHover hover-transition"
             onClick={() => router.push('/')}
             >

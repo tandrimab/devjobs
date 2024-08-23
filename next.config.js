@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXTAUTH_URL: "http://localhost:3000",
+    NEXTAUTH_URL: "",
     NEXTAUTH_SECRET: "svodEw3MakE1yixdmWLM1G1LZIUHSZ+J9NGvT4WzzPk=",
 
     GITHUB_ID: "Iv23li5UwsqYdjmoqWmh",

@@ -522,7 +522,7 @@ export default function ProfileForm({ defaultValues }) {
                       {...register("education.degree")}
                     >
                       {degrees.map((degree) => (
-                        <option value={degree}>{degree}</option>
+                        <option value={degree} key={degree}>{degree}</option>
                       ))}
                     </select>
                     <p className="text-warning mt-2">

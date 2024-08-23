@@ -14,7 +14,7 @@ export default function NotFound() {
         There is nothing here...
       </p>
       <p className="text-darkGrey text-xl text-center">
-        ...maybe the page you're looking for is not listed yet or never existed
+        ...maybe the page you&apos;re looking for is not listed yet or never existed
       </p>
       <GoBackClientComponent />
     </div>

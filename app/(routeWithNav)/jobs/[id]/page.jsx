@@ -160,7 +160,7 @@ export default function JobPage({ params }) {
               {job?.requirements?.items && job?.requirements.items.length ? (
                 <ul className="list-disc text-darkGrey mt-8 pl-4 space-y-2 marker:text-lightBlue">
                   {job?.requirements.items.map((item) => (
-                    <li className="pl-4">{item}</li>
+                    <li className="pl-4" key={item}>{item}</li>
                   ))}
                 </ul>
               ) : null}
@@ -175,7 +175,7 @@ export default function JobPage({ params }) {
               {job?.role?.items && job?.role.items.length ? (
                 <ol className="list-decimal text-darkGrey mt-8 pl-4 space-y-2 marker:text-lightBlue marker:font-bold">
                   {job?.role.items.map((item) => (
-                    <li className="pl-4">{item}</li>
+                    <li className="pl-4" key={item}>{item}</li>
                   ))}
                 </ol>
               ) : null}

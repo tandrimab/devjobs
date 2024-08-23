@@ -31,7 +31,7 @@ export default function Home() {
       <FilterJobs />
       <div className="grid lg:gap-12 lg:grid-cols-3 place-content-center w-full mt-12 md:grid-cols-2 md:gap-3 gap-0 sm:grid-cols-1 mb-6">
       {filtered && filtered.length ? filtered.map((item, id) => (
-        <JobCardBase data={item} id={id} />
+        <JobCardBase data={item} id={id} key={id} />
       )) : null}
       </div>
     </main>
