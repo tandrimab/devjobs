@@ -6,7 +6,7 @@ export default function Error({ error }) {
   const router = useRouter();
 
   return (
-    <div className="animate-shake min-h-screen flex items-center justify-center flex-col lg:max-w-[50%] sm:max-w-auto sm:px-8 mx-auto relative overflow-auto">
+    <div className=" min-h-screen flex items-center justify-center flex-col lg:max-w-[50%] sm:max-w-auto sm:px-8 mx-auto relative overflow-auto">
       <div>
         <Image
           src="/assets/desktop/500.svg"
@@ -22,7 +22,7 @@ export default function Error({ error }) {
         ...maybe you could try logging in again or go back to the home page
       </p>
       <button
-        className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-xl mx-auto mt-6 hover:bg-btnDarkHover hover-transition"
+        className="bg-lightBlue text-white py-3 px-9 rounded-[6px] font-bold font-xl mx-auto mt-6 hover:bg-btnDarkHover hover-transition animate-shake"
         onClick={() => router.push("/")}
       >
         <div className="flex gap-3">
