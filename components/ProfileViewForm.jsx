@@ -5,7 +5,7 @@ import Icon from "@mdi/react";
 import { useForm } from "react-hook-form";
 import { useEffect, useRef } from "react";
 
-export default async function ProfileViewForm({ defaultValues }) {
+export default function ProfileViewForm({ defaultValues }) {
   const { register, getValues } = useForm({
     defaultValues: defaultValues,
   });
