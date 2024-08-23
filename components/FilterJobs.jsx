@@ -6,7 +6,7 @@ import useWindowSize from "@/utilities/hooks/useWindowSize";
 import useDebounce from "@/utilities/hooks/useDebounce";
 import { useFilteredJobs, useStore } from "@/app/store/store";
 
-const FilterJobs = memo(function () {
+function FilterJobs() {
   const [filters, setFilters] = useState({
     position: "",
     location: "",
@@ -78,6 +78,6 @@ const FilterJobs = memo(function () {
   ) : (
     <FilterJobsWeb {...childProps} />
   );
-});
+}
 
-export default FilterJobs;
+export default memo(FilterJobs);
