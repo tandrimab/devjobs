@@ -2,15 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXTAUTH_URL: "",
+    NEXTAUTH_URL: "https://devjobs-delta.vercel.app/",
     NEXTAUTH_SECRET: "svodEw3MakE1yixdmWLM1G1LZIUHSZ+J9NGvT4WzzPk=",
 
     GITHUB_ID: "Iv23li5UwsqYdjmoqWmh",
     GITHUB_SECRET: "7d016e1ccf7252cb900126805989c98b75e524d0",
 
     GOOGLE_ID:
-      "714534511827-urikhonhiuk121s7javpb763gp01hvhm.apps.googleusercontent.com",
-    GOOGLE_SECRET: "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",
+      "759384126608-1v4vvtoc9c00997akspsrtgl3dpfjvjk.apps.googleusercontent.com",
+    GOOGLE_SECRET: "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",
 
     AZURE_AD_CLIENT_ID: "18a758b6-4bfe-40a8-a5a7-c7f4272118ff",
     AZURE_AD_CLIENT_SECRET: "yw_8Q~6CmHw3U-8MH1YXCqu2ZnrsNlFjxiX7acV6",
