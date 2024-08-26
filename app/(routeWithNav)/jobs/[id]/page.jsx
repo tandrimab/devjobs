@@ -10,6 +10,8 @@ import Icon from "@mdi/react";
 import { toast } from "react-toastify";
 import DotsLoader from "@/components/DotsLoader";
 import { mdiCheck } from "@mdi/js";
+import Modal from "@/components/Modal";
+import { useRouter } from "next/navigation";
 
 const url = process.env.NEXTAUTH_URL + "/api/user/appliedCompanies";
 
@@ -19,24 +21,45 @@ export default function JobPage({ params }) {
   const { data: session } = useSession();
   const [fetchData, setFetchData] = useState(false);
   const [isApplied, setIsApplied] = useState();
+  const [showdetailsModal, setShow] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const controller = new AbortController();
     async function fetchApi() {
       try {
-        const resp = await fetch(process.env.NEXTAUTH_URL + '/api/user/appliedCompanies/' + params.id, {signal: controller.signal});
+        const resp = await fetch(
+          process.env.NEXTAUTH_URL + "/api/user/appliedCompanies/" + params.id,
+          { signal: controller.signal }
+        );
         const data = await resp.json();
 
         if (data && data.success) {
           setIsApplied(true);
         }
-      } catch(e) {
-        toast.error(e)
+      } catch (e) {
+        toast.error(e);
       }
     }
     fetchApi();
     return () => controller.abort();
   }, []);
+
+  useEffect(async () => {
+    const res = await fetch(
+      process.env.NEXTAUTH_URL + "/api/user/profile/status"
+    );
+    const data = await res.json();
+    let timer;
+    if (data.success && !data.isUploaded) {
+      timer = setTimeout(() => setShow(true), 3000);
+    }
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [setShow]);
 
   const requestOptions = {
     ...HEADERS.POST_REQUEST,
@@ -45,11 +68,7 @@ export default function JobPage({ params }) {
     }),
   };
 
-  const { data, loading, error } = useFetch(
-    url,
-    requestOptions,
-    fetchData
-  );
+  const { data, loading, error } = useFetch(url, requestOptions, fetchData);
 
   if (error) {
     toast.error(error);
@@ -60,7 +79,7 @@ export default function JobPage({ params }) {
       return (
         <button
           onClick={() => setFetchData((val) => !val)}
-          className="bg-lightBlue rounded-[5px] text-white font-bold py-4 px-8 shrink-0 sm:w-full md:w-auto sm:mt-8 md:mt-0"
+          className="bg-lightBlue rounded-[5px] text-white font-bold py-4 px-8 shrink-0 sm:w-full md:w-auto sm:mt-8 md:mt-0 hover:scale-110 hover:delay-200 hover:duration-500"
         >
           Apply Now
         </button>
@@ -87,7 +106,8 @@ export default function JobPage({ params }) {
               fill="currentColor"
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             ></path>
-          </svg>Processing...
+          </svg>
+          Processing...
         </div>
       );
     } else if ((data && data.success) || isApplied) {
@@ -101,7 +121,7 @@ export default function JobPage({ params }) {
       );
     }
   };
-  
+
   return job && Object.keys(job).length ? (
     <div>
       <div className="min-h-screen flex items-center justify-between flex-col lg:max-w-[50%] md:max-w-[90%] sm:max-w-[90%] mx-auto lg:mt-[-4rem] md:mt-[-2rem] sm:mt-[-1rem] sm:mb-[1rem] shrink-0relative">
@@ -160,7 +180,9 @@ export default function JobPage({ params }) {
               {job?.requirements?.items && job?.requirements.items.length ? (
                 <ul className="list-disc text-darkGrey mt-8 pl-4 space-y-2 marker:text-lightBlue">
                   {job?.requirements.items.map((item) => (
-                    <li className="pl-4" key={item}>{item}</li>
+                    <li className="pl-4" key={item}>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               ) : null}
@@ -175,7 +197,9 @@ export default function JobPage({ params }) {
               {job?.role?.items && job?.role.items.length ? (
                 <ol className="list-decimal text-darkGrey mt-8 pl-4 space-y-2 marker:text-lightBlue marker:font-bold">
                   {job?.role.items.map((item) => (
-                    <li className="pl-4" key={item}>{item}</li>
+                    <li className="pl-4" key={item}>
+                      {item}
+                    </li>
                   ))}
                 </ol>
               ) : null}
@@ -192,6 +216,26 @@ export default function JobPage({ params }) {
           {session && renderButton()}
         </div>
       </div>
+      <Modal
+        modalClassName="p-6 backdrop-blur-xl backdrop-contrast-50 bg-black/60"
+        bodyClassName="sm:w-10/12 md:w-8/12 lg:w-1/2"
+      >
+        <div className="px-12 pt-8 flex justify-center items-center flex-col w-full">
+          <Image
+            src="/assets/desktop/no_details.svg"
+            width={300}
+            height={300}
+            alt="no_details"
+          />
+          <p className="font-xl text-lightBlue">
+            Please take a moment to upload your details to streamline your
+            application process
+          </p>
+          <button onClick={() => router.push('/profile/edit')} className="bg-lightBlue rounded-[5px] text-white font-bold py-4 px-8 shrink-0 sm:w-full md:w-auto sm:mt-8 md:mt-0 hover:scale-110 hover:delay-200 hover:duration-500">
+            Upload
+          </button>
+        </div>
+      </Modal>
     </div>
   ) : (
     <DotsLoader />

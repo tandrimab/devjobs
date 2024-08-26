@@ -11,7 +11,7 @@ export default function Home() {
   const setFilteredJobs = useFilteredJobs((state) => state.setFilteredJobs);
   const filteredJobs = useFilteredJobs((state) => state.filteredJobs);
 
-  const filtered = filteredJobs.length ? filteredJobs : jobs; 
+  const filtered = filteredJobs.length ? filteredJobs : jobs;
 
     useEffect(() => {
         async function fetchAPI() {
